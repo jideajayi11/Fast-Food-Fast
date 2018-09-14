@@ -43,4 +43,33 @@ describe('Order Endpoints', () => {
         done();
       });
   });
+  it('should add an order', (done) => {
+    chai.request(server)
+      .post('/api/v1/orders')
+      .send({
+        userId: 1,
+        foodId: 5,
+        price: 1000,
+        quantity: 1,
+      })
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('success');
+        expect(res.body).to.have.property('message')
+        .equal('Order Added');
+        expect(res.body.orderItem[0]).to.have.property('userId')
+        .equal(1);
+        expect(res.body.orderItem[0]).to.have.property('foodId')
+        .equal(5);
+        expect(res.body.orderItem[0]).to.have.property('price')
+        .equal(1000);
+        expect(res.body.orderItem[0]).to.have.property('quantity')
+        .equal(1);
+        expect(res.body.orderItem[0]).to.have.property('status')
+        .equal('pending');
+        expect(res.body.orderItem[0]).to.have.property('date');
+        done();
+      });
+  });
 });
