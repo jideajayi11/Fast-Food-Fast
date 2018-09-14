@@ -1,0 +1,110 @@
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+      <title>Fast-Food-Fast</title>
+      <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <header class="admin-theme" id="headerAuth">
+          <div class="container">
+            <div class="spread-in">
+            <div class="logo-title text-center"><img src="images/delivery-icon.png" class="app-logo">Fast-Food-Fast</div>
+              <div id="menu-icon">
+                <button class="menu">
+                  <span class="strip"></span>
+                  <span class="strip"></span>
+                  <span class="strip"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <nav id="menu-items">
+            <a href="adminFood.html"><div class="first">Manage Food</div></a>
+            <a href="adminOrder.html"><div>Manage Orders</div></a>
+            <a href="adminLogin.html"><div class="last">Logout</div></a>
+          </nav>
+        </header>
+        <div class="bg-dim">
+          <div class="container">
+            <div class="mb-70"></div>
+            <div class="spread-in mt-20">
+              <div class="pageTitle">Manage Orders:</div>
+              <div><span class="text-theme">Welcome</span> <strong>Jide!</strong></div>
+            </div>
+            <div class="table-responsive">
+              <table class="mt-20">
+                <tr>
+                  <th>Customer</th>
+                  <th>Phone Number</th>
+                  <th>Delivery Address</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                </tr>
+                <tr>
+                  <td>Samuel Eric</td>
+                  <td>08134561234</td>
+                  <td>1, olabode street, ikorodu Lagos.</td>
+                  <td>Fried Rice &amp; chicken</td>
+                  <td>800</td>
+                  <td>2</td>
+                  <td>1600</td>
+                  <td><button class="" title="click to change status" onclick="document.querySelector('.overlay').style.display = 'flex';">Pending</button></td>
+                </tr>
+                <tr>
+                  <td>Williams Mary</td>
+                  <td>07056473829</td>
+                  <td>7, ajegunle street, obanikoro Lagos.</td>
+                  <td>Yam Porridge</td>
+                  <td>500</td>
+                  <td>1</td>
+                  <td>500</td>
+                  <td><button class="" title="click to change status" onclick="document.querySelector('.overlay').style.display = 'flex';">Accepted</button></td>
+                </tr>
+                <tr>
+                  <td>Samuel Eric</td>
+                  <td>08134561234</td>
+                  <td>1, olabode street, ikorodu Lagos.</td>
+                  <td>Chicken &amp; Chips</td>
+                  <td>500</td>
+                  <td>4</td>
+                  <td>2000</td>
+                  <td><button class="" title="click to change status" onclick="document.querySelector('.overlay').style.display = 'flex';">Completed</button></td>
+                </tr>
+              </table>
+            </div>
+            </div>
+          
+          <div class="mt-80"></div>
+        </div>
+      <div class="overlay">
+        <div class="popup">
+          <div class="popup-head">
+            <strong>Change Status</strong>
+          </div>
+          <div class="popup-body">
+            <div class="spread-in">
+              <select class="mt-20" name="">
+                <option value="" selected>Change Status</option>
+                <option value="1">Pending</option>
+                <option value="2">Accepted</option>
+                <option value="3">Completed</option>
+                <option value="4">Declined</option>
+              </select>
+            </div>
+            <div class="mt-20 spread-in"><a onclick="loginFunction();" href=""><button onclick="document.querySelector('.overlay').style.display = 'none';">Change</button></a>
+            <button class="red" onclick="document.querySelector('.overlay').style.display = 'none';">Close</button>
+            </div>
+            </div>
+          </div>
+      </div>
+      <footer id="footerAuth">
+        <div class="container">
+            &copy; 2018 Fast-Food-Fast. All rights reserved.
+        </div>
+      </footer>
+        <script type="text/javascript" src="js/gui.js"></script>
+    </body>
+</html>
