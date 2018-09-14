@@ -62,5 +62,34 @@ class Order {
     }
   }
 
+  static updateOrder(req, res, next) {
+    const id = req.params.id;
+    const index = order.findIndex((item) => {
+      return item.id == id;
+    });
+    if(req.body.status == 'pending' || req.body.status == 'accepted' ||
+     req.body.status == 'declined' || req.body.status == 'completed') {
+      order.splice(index, 1, {
+        id: order[index].id,
+        userId: order[index].userId,
+        foodId: order[index].foodId,
+        price: order[index].price,
+        quantity: order[index].quantity,
+        status: req.body.status,
+        date: order[index].date
+      });
+      return res.status(200).json({
+        order,
+        status: 'success',
+        message: 'Order Updated'
+      });
+    }else {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid Status'
+      });
+    }
+  }
+
 }
 export default Order;

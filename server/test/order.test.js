@@ -80,16 +80,43 @@ describe('Order Endpoints', () => {
   });
   it('should update an order', (done) => {
     chai.request(server)
-      .put('/api/v1/orders/id')
+      .put('/api/v1/orders/1')
       .send({
         status: 'completed'
       })
       .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(200);
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message')
-        .equal('Order Added');
+        .equal('Order Updated');
+        expect(res.body.order[0]).to.have.property('userId')
+        .equal(3);
+        expect(res.body.order[0]).to.have.property('foodId')
+        .equal(8);
+        expect(res.body.order[0]).to.have.property('price')
+        .equal(500);
+        expect(res.body.order[0]).to.have.property('quantity')
+        .equal(4);
+        expect(res.body.order[0]).to.have.property('status')
+        .equal('completed');
+        expect(res.body.order[0]).to.have.property('date')
+        .equal('2018-09-01');
+        done();
+      });
+  });
+  it('should not update order with invalid status', (done) => {
+    chai.request(server)
+      .put('/api/v1/orders/1')
+      .send({
+        status: 'pend'
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+        .equal('Invalid Status');
         done();
       });
   });
