@@ -9,9 +9,29 @@ class Order {
         message: 'Retrieved all your orders'
       });
     }else {
-      return res.status(400).json({
-        error: 400,
-        message: 'Incomplete parameters'
+      return res.status(404).json({
+        error: 404,
+        message: 'Not found'
+      });
+    }
+  }
+  
+  static getOrder(req, res, next) {
+    const id = req.params.id;
+    const orderItem = order.filter((item) => {
+      return item.id == id;
+    });
+    //console.log(order);
+    if( orderItem.length == 1 ) {
+      return res.status(200).json({
+        orderItem,
+        status: 'success',
+        message: 'Order found'
+      });
+    }else {
+      return res.status(404).json({
+        error: 404,
+        message: 'Not found'
       });
     }
   }
