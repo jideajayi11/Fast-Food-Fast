@@ -78,4 +78,19 @@ describe('Order Endpoints', () => {
         done();
       });
   });
+  it('should update an order', (done) => {
+    chai.request(server)
+      .put('/api/v1/orders/id')
+      .send({
+        status: 'completed'
+      })
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('success');
+        expect(res.body).to.have.property('message')
+        .equal('Order Added');
+        done();
+      });
+  });
 });
