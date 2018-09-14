@@ -1,6 +1,9 @@
 {
   "name": "fast-food-fast",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.11.1"
+  },
   "description": "This is a food delivery service app for a restaurant",
   "main": "index.js",
   "eslintIgnore": [
@@ -16,7 +19,9 @@
     }
   },
   "scripts": {
-    "start": "babel-node ./server/",
+    "start": "node ./server/dist/index.js",
+    "build": "cross-env NODE_ENV=production babel ./server/ -d ./server/dist",
+    "heroku-postbuild": "npm run build",
     "test": "set NODE_ENV=test&&nyc mocha --timeout 10000 --compilers js:babel-core/register --require babel-polyfill ./server/test/**/*.test.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=lcov",
     "cover": "./node_modules/coveralls/bin/coveralls",
@@ -54,6 +59,7 @@
     "chai": "^4.1.2",
     "chai-http": "^4.2.0",
     "coveralls": "^3.0.2",
+    "cross-env": "^5.2.0",
     "eslint": "^5.5.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.0.1",
