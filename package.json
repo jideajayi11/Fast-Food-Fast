@@ -16,7 +16,7 @@
     }
   },
   "scripts": {
-    "start": "babel-node --presets es2015,stage-2 ./server/",
+    "start": "babel-node ./server/",
     "test": "set NODE_ENV=test&&nyc mocha --timeout 10000 --compilers js:babel-core/register --require babel-polyfill ./server/test/**/*.test.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=lcov",
     "cover": "./node_modules/coveralls/bin/coveralls",
