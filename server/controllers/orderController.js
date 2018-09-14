@@ -21,7 +21,6 @@ class Order {
     const orderItem = order.filter((item) => {
       return item.id == id;
     });
-    //console.log(order);
     if( orderItem.length == 1 ) {
       return res.status(200).json({
         orderItem,
@@ -32,6 +31,33 @@ class Order {
       return res.status(404).json({
         error: 404,
         message: 'Not found'
+      });
+    }
+  }
+  
+  static addOrder(req, res, next) {
+    if(req.body.userId == '' || req.body.foodId == '' ||
+     req.body.price == '' || req.body.quantity == '') {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Incomplete parameters'
+      });
+    }else {
+      const lastId = order[order.length - 1].id;
+      const orderItem = {
+        id: lastId + 1,
+        userId: req.body.userId,
+        foodId: req.body.foodId,
+        price: req.body.price,
+        quantity: req.body.quantity,
+        status: 'pending',
+        date: Date()
+      };
+      order.push(orderItem);
+      return res.status(201).json({
+        order,
+        status: 'success',
+        message: 'Order Added'
       });
     }
   }
