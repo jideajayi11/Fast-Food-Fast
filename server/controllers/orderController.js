@@ -36,8 +36,8 @@ class Order {
   }
   
   static addOrder(req, res, next) {
-    if(req.body.userId == '' || req.body.foodId == '' ||
-     req.body.price == '' || req.body.quantity == '') {
+    if(req.body.userId === '' || req.body.foodId === '' ||
+     req.body.price === '' || req.body.quantity === '') {
       return res.status(400).json({
         status: 'error',
         message: 'Incomplete parameters'
