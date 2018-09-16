@@ -5,9 +5,9 @@ const foodModel = [
 		imageURL: 'chickenChips.jpg',
 		price: 500,
 		restaurant: {
-		adminId: 1,
-		restaurantName: 'Kobis',
-		restaurantPhone: '08012345678'
+			adminId: 1,
+			name: 'Kobis',
+			phoneNumber: '08012345678'
 		},
 		date: '2018-09-01'
 	},
@@ -17,9 +17,9 @@ const foodModel = [
 		imageURL: 'porridge.jpg',
 		price: 1200,
 		restaurant: {
-		adminId: 2,
-		restaurantName: 'Chicken Republic',
-		restaurantPhone: '08112345678'
+			adminId: 2,
+			name: 'Chicken Republic',
+			phoneNumber: '08112345678'
 		},
 		date: '2018-07-21'
 	},
@@ -29,9 +29,9 @@ const foodModel = [
 		imageURL: 'friedRiceChicken.jpg',
 		price: 2000,
 		restaurant: {
-		adminId: 3,
-		restaurantName: 'KFC',
-		restaurantPhone: '07012345678'
+			adminId: 3,
+			name: 'KFC',
+			phoneNumber: '07012345678'
 		},
 		date: '2018-05-16'
 	},
