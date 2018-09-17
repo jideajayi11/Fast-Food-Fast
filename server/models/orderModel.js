@@ -2,7 +2,12 @@ const orderModel = [
   {
     id: 1,
     userId: 3,
-    foodId: 8,
+    food: {
+      id: 8,
+      description: 'Chicken & Chips',
+      imageURL: 'chickenChips.jpg',
+      price: 500
+    },
     price: 500,
     quantity: 4,
     orderStatus: 'pending',
@@ -11,7 +16,12 @@ const orderModel = [
   {
     id: 2,
     userId: 5,
-    foodId: 18,
+    food: {
+      id: 18,
+      description: 'Fried Rice & Chicken',
+      imageURL: 'friedRiceChicken.jpg',
+      price: 2000
+    },
     price: 1200,
     quantity: 2,
     orderStatus: 'completed',
@@ -20,7 +30,12 @@ const orderModel = [
   {
     id: 3,
     userId: 6,
-    foodId: 2,
+    food: {
+      id: 2,
+      description: 'Chicken & Chips',
+      imageURL: 'chickenChips.jpg',
+      price: 500
+    },
     price: 2500,
     quantity: 1,
     orderStatus: 'declined',
