@@ -2,28 +2,40 @@ const orderModel = [
   {
     id: 1,
     userId: 3,
-    foodId: 8,
-    price: 500,
+    food: {
+      id: 8,
+      description: 'Chicken & Chips',
+      imageURL: 'chickenChips.jpg',
+      price: 500
+    },
     quantity: 4,
-    status: 'pending',
+    orderStatus: 'pending',
     date: '2018-09-01'
   },
   {
     id: 2,
     userId: 5,
-    foodId: 18,
-    price: 1200,
+    food: {
+      id: 18,
+      description: 'Fried Rice & Chicken',
+      imageURL: 'friedRiceChicken.jpg',
+      price: 1200
+    },
     quantity: 2,
-    status: 'completed',
+    orderStatus: 'completed',
     date: '2018-07-21'
   },
   {
     id: 3,
     userId: 6,
-    foodId: 2,
-    price: 2500,
+    food: {
+      id: 2,
+      description: 'Chicken & Chips',
+      imageURL: 'chickenChips.jpg',
+      price: 2500
+    },
     quantity: 1,
-    status: 'declined',
+    orderStatus: 'declined',
     date: '2018-05-16'
   },
 ];
