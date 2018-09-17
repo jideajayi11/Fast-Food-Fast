@@ -5,7 +5,7 @@ const orderModel = [
     foodId: 8,
     price: 500,
     quantity: 4,
-    status: 'pending',
+    orderStatus: 'pending',
     date: '2018-09-01'
   },
   {
@@ -14,7 +14,7 @@ const orderModel = [
     foodId: 18,
     price: 1200,
     quantity: 2,
-    status: 'completed',
+    orderStatus: 'completed',
     date: '2018-07-21'
   },
   {
@@ -23,7 +23,7 @@ const orderModel = [
     foodId: 2,
     price: 2500,
     quantity: 1,
-    status: 'declined',
+    orderStatus: 'declined',
     date: '2018-05-16'
   },
 ];

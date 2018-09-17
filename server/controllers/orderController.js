@@ -52,7 +52,7 @@ class Order {
         foodId: req.body.foodId,
         price: req.body.price,
         quantity: req.body.quantity,
-        status: 'pending',
+        orderStatus: 'pending',
         date: Date()
       };
       order.push(orderItem);
@@ -62,7 +62,7 @@ class Order {
         foodId: req.body.foodId,
         price: req.body.price,
         quantity: req.body.quantity,
-        status: 'pending',
+        orderStatus: 'pending',
         date: Date(),
         status: 'success',
         message: 'Order Added'
@@ -75,19 +75,25 @@ class Order {
     const index = order.findIndex((item) => {
       return item.id == id;
     });
-    if(req.body.status == 'pending' || req.body.status == 'accepted' ||
-     req.body.status == 'declined' || req.body.status == 'completed') {
+    if(req.body.orderStatus == 'pending' || req.body.orderStatus == 'accepted' ||
+     req.body.orderStatus == 'declined' || req.body.orderStatus == 'completed') {
       order.splice(index, 1, {
         id: order[index].id,
         userId: order[index].userId,
         foodId: order[index].foodId,
         price: order[index].price,
         quantity: order[index].quantity,
-        status: req.body.status,
+        orderStatus: req.body.orderStatus,
         date: order[index].date
       });
       return res.status(200).json({
-        order,
+        id: order[index].id,
+        userId: order[index].userId,
+        foodId: order[index].foodId,
+        price: order[index].price,
+        quantity: order[index].quantity,
+        orderStatus: order[index].orderStatus,
+        date: order[index].date,
         status: 'success',
         message: 'Order Updated'
       });
