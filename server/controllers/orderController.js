@@ -37,7 +37,9 @@ class Order {
   
   static addOrder(req, res, next) {
     if(req.body.userId === '' || req.body.foodId === '' ||
-     req.body.price === '' || req.body.quantity === '') {
+     req.body.price === '' || req.body.quantity === '' || 
+     req.body.userId === undefined || req.body.foodId === undefined ||
+     req.body.price === undefined || req.body.quantity === undefined) {
       return res.status(400).json({
         status: 'error',
         message: 'Incomplete parameters'
@@ -55,7 +57,13 @@ class Order {
       };
       order.push(orderItem);
       return res.status(201).json({
-        order,
+        id: lastId + 1,
+        userId: req.body.userId,
+        foodId: req.body.foodId,
+        price: req.body.price,
+        quantity: req.body.quantity,
+        status: 'pending',
+        date: Date(),
         status: 'success',
         message: 'Order Added'
       });
