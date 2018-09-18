@@ -90,8 +90,12 @@ class Order {
       order.splice(index, 1, {
         id: order[index].id,
         userId: order[index].userId,
-        foodId: order[index].foodId,
-        price: order[index].price,
+        food: {
+          id: order[index].food.id,
+          description: order[index].food.description,
+          imageURL: order[index].food.imageURL,
+          price: order[index].food.price
+        },
         quantity: order[index].quantity,
         orderStatus: req.body.orderStatus,
         date: order[index].date
@@ -99,8 +103,12 @@ class Order {
       return res.status(200).json({
         id: order[index].id,
         userId: order[index].userId,
-        foodId: order[index].foodId,
-        price: order[index].price,
+        food: {
+          id: order[index].food.id,
+          description: order[index].food.description,
+          imageURL: order[index].food.imageURL,
+          price: order[index].food.price
+        },
         quantity: order[index].quantity,
         orderStatus: order[index].orderStatus,
         date: order[index].date,
