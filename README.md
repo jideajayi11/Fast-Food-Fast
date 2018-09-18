@@ -22,9 +22,13 @@ Restaurant Admin can add, edit, delete food and manage orders made to their rest
 
 ### API Endpoints
 GET `/api/v1/orders` - `Fetch all orders`
+
 GET `/api/v1/orders/:id` - `Fetch a single order`
+
 POST `/api/v1/orders` - `Add an order`
+
 PUT `/api/v1/orders/:id` - `Update an order`
+
 
 ### Technologies
 * [Node.js](https://nodejs.org/) - `Runtime Environment`
