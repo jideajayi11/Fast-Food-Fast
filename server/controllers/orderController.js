@@ -37,9 +37,11 @@ class Order {
   
   static addOrder(req, res, next) {
     if(req.body.userId === '' || req.body.foodId === '' ||
-     req.body.price === '' || req.body.quantity === '' || 
+     req.body.foodDescription === '' || req.body.foodImageURL === '' || 
+     req.body.foodPrice === '' || req.body.quantity === '' ||
      req.body.userId === undefined || req.body.foodId === undefined ||
-     req.body.price === undefined || req.body.quantity === undefined) {
+     req.body.foodDescription === undefined || req.body.foodImageURL === undefined ||
+     req.body.foodPrice === undefined || req.body.quantity === undefined) {
       return res.status(400).json({
         status: 'error',
         message: 'Incomplete parameters'
@@ -49,8 +51,12 @@ class Order {
       const orderItem = {
         id: lastId + 1,
         userId: req.body.userId,
-        foodId: req.body.foodId,
-        price: req.body.price,
+        food: {
+          id: req.body.foodId,
+          description: req.body.foodDescription,
+          imageURL: req.body.foodImageURL,
+          price: req.body.foodPrice
+        },
         quantity: req.body.quantity,
         orderStatus: 'pending',
         date: Date()
@@ -59,8 +65,12 @@ class Order {
       return res.status(201).json({
         id: lastId + 1,
         userId: req.body.userId,
-        foodId: req.body.foodId,
-        price: req.body.price,
+        food: {
+          id: req.body.foodId,
+          description: req.body.foodDescription,
+          imageURL: req.body.foodImageURL,
+          price: req.body.foodPrice
+        },
         quantity: req.body.quantity,
         orderStatus: 'pending',
         date: Date(),

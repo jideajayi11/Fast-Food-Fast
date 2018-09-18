@@ -8,7 +8,6 @@ const orderModel = [
       imageURL: 'chickenChips.jpg',
       price: 500
     },
-    price: 500,
     quantity: 4,
     orderStatus: 'pending',
     date: '2018-09-01'
@@ -20,9 +19,8 @@ const orderModel = [
       id: 18,
       description: 'Fried Rice & Chicken',
       imageURL: 'friedRiceChicken.jpg',
-      price: 2000
+      price: 1200
     },
-    price: 1200,
     quantity: 2,
     orderStatus: 'completed',
     date: '2018-07-21'
@@ -34,9 +32,8 @@ const orderModel = [
       id: 2,
       description: 'Chicken & Chips',
       imageURL: 'chickenChips.jpg',
-      price: 500
+      price: 2500
     },
-    price: 2500,
     quantity: 1,
     orderStatus: 'declined',
     date: '2018-05-16'
