@@ -28,8 +28,9 @@
           <div class="container">
             <div class="mb-70"></div>
             <div class="spread-in mt-20">
+              <span></span>
               <div class="pageTitle">My Orders:</div>
-              <div><span class="text-theme">Welcome</span> <strong>Jide!</strong></div>
+              <div class="top-text"><span class="text-theme">User: </span> <strong>Jide!</strong></div>
             </div>
             <div class="table-responsive">
               <table class="mt-20">
@@ -47,7 +48,7 @@
                   <td>800</td>
                   <td>2</td>
                   <td>1600</td>
-                  <td><button>Pending</button></td>
+                  <td><button onclick="document.querySelector('.overlay').style.display = 'flex';">Pending</button></td>
                 </tr>
                 <tr>
                   <td>Chicken Republic</td>
@@ -55,7 +56,7 @@
                   <td>500</td>
                   <td>1</td>
                   <td>500</td>
-                  <td><button>Accepted</button></td>
+                  <td>Accepted</td>
                 </tr>
                 <tr>
                   <td>KFC</td>
@@ -63,7 +64,7 @@
                   <td>500</td>
                   <td>4</td>
                   <td>2000</td>
-                  <td><button>Completed</button></td>
+                  <td>Completed</td>
                 </tr>
               </table>
             </div>
@@ -72,6 +73,21 @@
           <div class="mt-80"></div>
         </div>
       
+      <div class="overlay">
+        <div class="popup">
+          <div class="popup-head">
+            <strong>Cancel Order</strong>
+          </div>
+          <div class="popup-body">
+            <div class="spread-in">
+              Do you want to cancel this order?
+            </div>
+            <div class="mt-20 spread-in"><a onclick="" href=""><button onclick="document.querySelector('.overlay').style.display = 'none';">Yes</button></a>
+            <button class="red" onclick="document.querySelector('.overlay').style.display = 'none';">No</button>
+            </div>
+            </div>
+          </div>
+      </div>
       <footer id="footerAuth">
         <div class="container">
             &copy; 2018 Fast-Food-Fast. All rights reserved.

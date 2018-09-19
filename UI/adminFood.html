@@ -28,10 +28,10 @@
           <div class="container">
             <div class="mb-70"></div>
             <div class="spread-in mt-20">
+              <button class="" title="click to add food" onclick="document.querySelector('.overlay').style.display = 'flex';">Add Food</button>
               <div class="pageTitle">Manage Food:</div>
-              <div><span class="text-theme">Welcome</span> <strong>Jide!</strong></div>
+              <div class="top-text"><span class="text-theme">Admin: </span> <strong>Jide!</strong></div>
             </div>
-              <button class="mt-20" title="click to add food" onclick="document.querySelector('.overlay').style.display = 'flex';">Add Food</button>
             <div class="table-responsive">
               <table class="mt-20">
                 <tr>
@@ -46,21 +46,21 @@
                   <td>Fried Rice &amp; chicken</td>
                   <td>800</td>
                   <td><button class="" title="click to edit" onclick="document.querySelector('.overlay2').style.display = 'flex';">Edit</button></td>
-                  <td><button class="red" title="click to delete" >Delete</button></td>
+                  <td><button class="red" title="click to delete" onclick="document.querySelector('.overlay3').style.display = 'flex';">Delete</button></td>
                 </tr>
                 <tr>
                   <td><img src="images/food/porridge.jpg"></td>
                   <td>Yam Porridge</td>
                   <td>500</td>
                   <td><button class="" title="click to edit" onclick="document.querySelector('.overlay2').style.display = 'flex';">Edit</button></td>
-                  <td><button class="red" title="click to delete" >Delete</button></td>
+                  <td><button class="red" title="click to delete" onclick="document.querySelector('.overlay3').style.display = 'flex';">Delete</button></td>
                 </tr>
                 <tr>
                   <td><img src="images/food/chips.jpg"></td>
                   <td>Chicken &amp; Chips</td>
                   <td>500</td>
                   <td><button class="" title="click to edit" onclick="document.querySelector('.overlay2').style.display = 'flex';">Edit</button></td>
-                  <td><button class="red" title="click to delete" >Delete</button></td>
+                  <td><button class="red" title="click to delete" onclick="document.querySelector('.overlay3').style.display = 'flex';">Delete</button></td>
                 </tr>
               </table>
             </div>
@@ -101,6 +101,19 @@
             </div>
             </div>
           </div>
+      </div>
+      <div class="overlay3">
+        <div class="popup">
+          <div class="popup-head">
+            <strong>Delete Food</strong>
+          </div>
+          <div class="popup-body">
+              Are you sure you want to delete this food?
+            <div class="mt-20 spread-in"><a onclick="loginFunction();" href=""><button onclick="document.querySelector('.overlay3').style.display = 'none';">Yes</button></a>
+            <button class="red" onclick="document.querySelector('.overlay3').style.display = 'none';">No</button>
+            </div>
+            </div>
+        </div>
       </div>
       <footer id="footerAuth">
         <div class="container">
