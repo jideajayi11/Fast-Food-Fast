@@ -19,6 +19,7 @@ button{
   border: solid 2px#fff;
   padding-top: 5px;
   padding-bottom: 5px;
+  min-width: 60px;
 }
 button.red{
   background-color: rgb(204, 19, 19);
@@ -30,7 +31,8 @@ button:active{
   background-color: #000;
 }
 button.menu{
-	margin-top: 10px;
+  margin-top: 10px;
+  min-width: 35px;
 }
 button.menu:hover{
 	background-color: rgb(204, 19, 19);
@@ -80,10 +82,10 @@ nav div.last{
   display: none;
 }
 header {
-  background-color: #fff;
-  color: rgb(12, 108, 153);
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   min-height: 45px;
-  border-bottom: solid 2px rgb(12, 108, 153);
+  border-bottom: solid 2px rgb(204, 19, 19);
   position: fixed;
 	top: 0;
   width: 100%;
@@ -131,6 +133,11 @@ header .container{
 .text-theme{
   color: rgb(12, 108, 153);
 }
+.top-text{
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+}
 .container{
   margin-left: 80px;
   margin-right: 80px;
@@ -145,6 +152,7 @@ header .container{
   border-bottom: solid 3px rgb(12, 108, 153);
   font-size: 22px;
   font-family: cursive;
+  display: none;
 }
 .app-logo{
 	height: 35px;
@@ -258,6 +266,20 @@ select option{
     display: none;
 }
 .overlay2{
+    background-color: rgba(78, 69, 69, 0.377);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 3;
+    display: none;
+}
+.overlay3{
     background-color: rgba(78, 69, 69, 0.377);
     position: fixed;
     top: 0;

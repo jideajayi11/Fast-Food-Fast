@@ -28,15 +28,15 @@
           <div class="container">
             <div class="mb-70"></div>
             <div class="spread-in mt-20">
-              <div class="pageTitle">Restaurants:</div>
-              <div><span class="text-theme">Welcome</span> <strong>Jide!</strong></div>
-            </div>
-              <select class="mt-20" name="">
+              <select class="" name="">
                 <option value="" selected>Select Restaurant</option>
                 <option value="1">Kobis</option>
                 <option value="2">Chicken Republic</option>
                 <option value="3">KFC</option>
               </select>
+              <div class="pageTitle">Restaurants:</div>
+              <div class="top-text"><span class="text-theme">User: </span> <strong>Jide!</strong></div>
+            </div>
             <div class="table-responsive">
               <table class="mt-20">
                 <tr>
@@ -51,21 +51,21 @@
                   <td>Fried Rice &amp; chicken</td>
                   <td>800</td>
                   <td><input name="" type="number" value="1"></td>
-                  <td><button title="click to order">Order</button></td>
+                  <td><button title="click to order" onclick="document.querySelector('.overlay').style.display = 'flex';">Order</button></td>
                 </tr>
                 <tr>
                   <td><img src="images/food/porridge.jpg"></td>
                   <td>Yam Porridge</td>
                   <td>500</td>
                   <td><input name="" type="number" value="1"></td>
-                  <td><button title="click to order">Order</button></td>
+                  <td><button title="click to order" onclick="document.querySelector('.overlay').style.display = 'flex';">Order</button></td>
                 </tr>
                 <tr>
                   <td><img src="images/food/chips.jpg"></td>
                   <td>Chicken &amp; Chips</td>
                   <td>500</td>
                   <td><input name="" type="number" value="1"></td>
-                  <td><button title="click to order">Order</button></td>
+                  <td><button title="click to order" onclick="document.querySelector('.overlay').style.display = 'flex';">Order</button></td>
                 </tr>
               </table>
             </div>
@@ -74,6 +74,23 @@
           <div class="mt-80"></div>
         </div>
   
+      <div class="overlay">
+        <div class="popup">
+          <div class="popup-head">
+            <strong>Food Order</strong>
+          </div>
+          <div class="popup-body">
+            <div class="spread-in">
+              Are you sure you want to make this order?<br>
+              If yes, click 'order', else click 'cancel'. 
+              Payment would be on delivery.
+            </div>
+            <div class="mt-20 spread-in"><a onclick="" href=""><button onclick="document.querySelector('.overlay').style.display = 'none';">Order</button></a>
+            <button class="red" onclick="document.querySelector('.overlay').style.display = 'none';">Cancel</button>
+            </div>
+            </div>
+          </div>
+      </div>
       <footer id="footerAuth">
         <div class="container">
             &copy; 2018 Fast-Food-Fast. All rights reserved.
