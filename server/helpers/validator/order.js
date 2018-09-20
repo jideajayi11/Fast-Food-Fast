@@ -34,5 +34,22 @@ class Validate {
       next();
     }
   }
+  static updateOrder(req, res, next) {
+    /*if (typeof req.params.id != 'number') {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid Parameter',
+      });
+    }
+    else*/ if (req.body.orderStatus == 'pending' || req.body.orderStatus == 'accepted'
+     || req.body.orderStatus == 'declined' || req.body.orderStatus == 'completed') {
+       next();
+    }else {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid Status',
+      });
+    }
+  }
 }
 export default Validate;
