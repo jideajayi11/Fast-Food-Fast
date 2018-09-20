@@ -19,9 +19,7 @@
     }
   },
   "scripts": {
-    "start": "node ./server/dist/index.js",
-    "build": "cross-env NODE_ENV=production babel ./server/ -d ./server/dist",
-    "heroku-postbuild": "npm run build",
+    "start": "babel-node ./server/index.js",
     "test": "set NODE_ENV=test&&nyc mocha --timeout 10000 --compilers js:babel-core/register --require babel-polyfill ./server/test/**/*.test.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=lcov",
     "cover": "./node_modules/coveralls/bin/coveralls",
