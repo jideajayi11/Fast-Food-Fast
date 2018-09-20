@@ -7,9 +7,9 @@ const foodModel = [
 		restaurant: {
 			adminId: 1,
 			name: 'Kobis',
-			phoneNumber: '08012345678'
+			phoneNumber: '08012345678',
 		},
-		date: '2018-09-01'
+		date: '2018-09-01',
 	},
 	{
 		id: 2,
@@ -19,9 +19,9 @@ const foodModel = [
 		restaurant: {
 			adminId: 2,
 			name: 'Chicken Republic',
-			phoneNumber: '08112345678'
+			phoneNumber: '08112345678',
 		},
-		date: '2018-07-21'
+		date: '2018-07-21',
 	},
 	{
 		id: 3,
@@ -31,9 +31,9 @@ const foodModel = [
 		restaurant: {
 			adminId: 3,
 			name: 'KFC',
-			phoneNumber: '07012345678'
+			phoneNumber: '07012345678',
 		},
-		date: '2018-05-16'
+		date: '2018-05-16',
 	},
 ];
 export default foodModel;

@@ -1,6 +1,5 @@
 /node_modules
-/.nyc_output
-/server/dist
-/coverage
 /.coveralls.yml
+/.nyc_output
+/coverage
 /.env

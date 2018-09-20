@@ -1,7 +1,7 @@
 import chai from 'chai';
 import { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../';
+import server from '..';
 
 const should = chai.should();
 chai.use(chaiHttp);
@@ -84,7 +84,7 @@ describe('Order Endpoints', () => {
     chai.request(server)
       .put('/api/v1/orders/1')
       .send({
-        orderStatus: 'completed'
+        orderStatus: 'completed',
       })
       .end((err, res) => {
         res.should.have.status(200);
@@ -111,7 +111,7 @@ describe('Order Endpoints', () => {
     chai.request(server)
       .put('/api/v1/orders/1')
       .send({
-        status: 'pend'
+        status: 'pend',
       })
       .end((err, res) => {
         res.should.have.status(400);

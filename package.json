@@ -10,7 +10,7 @@
     "package-lock.json",
     "package.json",
     "README.md",
-    "node_modules"
+    "./coverage"
   ],
   "eslintConfig": {
     "env": {
@@ -23,7 +23,7 @@
     "test": "set NODE_ENV=test&&nyc mocha --timeout 10000 --compilers js:babel-core/register --require babel-polyfill ./server/test/**/*.test.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=lcov",
     "cover": "./node_modules/coveralls/bin/coveralls",
-    "lint": "eslint ./node_modules/.bin/eslint"
+    "lint": "eslint ./node_modules/.bin/eslint . --fix"
   },
   "repository": {
     "type": "git",
