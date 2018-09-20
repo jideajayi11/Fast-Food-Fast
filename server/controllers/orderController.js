@@ -34,7 +34,7 @@ return res.status(404).json({
   }
 
   static addOrder(req, res, next) {
-    if (req.body.userId === '' || req.body.foodId === ''
+   /* if (req.body.userId === '' || req.body.foodId === ''
      || req.body.foodDescription === '' || req.body.foodImageURL === ''
      || req.body.foodPrice === '' || req.body.quantity === ''
      || req.body.userId === undefined || req.body.foodId === undefined
@@ -44,7 +44,7 @@ return res.status(404).json({
         status: 'error',
         message: 'Incomplete parameters',
       });
-    }
+     }*/
       const lastId = order[order.length - 1].id;
       const orderItem = {
         id: lastId + 1,
