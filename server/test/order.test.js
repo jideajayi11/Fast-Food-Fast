@@ -30,13 +30,13 @@ describe('Order Endpoints', () => {
         .equal('Order found');
         expect(res.body.orderItem[0]).to.have.property('userId')
         .equal(3);
-        expect(res.body.orderItem[0]).to.have.property('foodId')
-        .equal(8);
-        expect(res.body.orderItem[0]).to.have.property('price')
-        .equal(500);
+        expect(res.body.orderItem[0].food)
+        .to.have.property('id').equal(8);
+        expect(res.body.orderItem[0].food)
+        .to.have.property('price').equal(500);
         expect(res.body.orderItem[0]).to.have.property('quantity')
         .equal(4);
-        expect(res.body.orderItem[0]).to.have.property('status')
+        expect(res.body.orderItem[0]).to.have.property('orderStatus')
         .equal('pending');
         expect(res.body.orderItem[0]).to.have.property('date')
         .equal('2018-09-01');
@@ -49,7 +49,9 @@ describe('Order Endpoints', () => {
       .send({
         userId: 1,
         foodId: 5,
-        price: 1000,
+        foodDescription: 'Fried Rice & Chicken',
+        foodImageURL: 'friedRiceChicken.jpg',
+        foodPrice: 1000,
         quantity: 1,
       })
       .end((err, res) => {
@@ -82,7 +84,7 @@ describe('Order Endpoints', () => {
     chai.request(server)
       .put('/api/v1/orders/1')
       .send({
-        status: 'completed'
+        orderStatus: 'completed'
       })
       .end((err, res) => {
         res.should.have.status(200);
@@ -90,17 +92,17 @@ describe('Order Endpoints', () => {
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message')
         .equal('Order Updated');
-        expect(res.body.order[0]).to.have.property('userId')
+        expect(res.body).to.have.property('userId')
         .equal(3);
-        expect(res.body.order[0]).to.have.property('foodId')
+        expect(res.body.food).to.have.property('id')
         .equal(8);
-        expect(res.body.order[0]).to.have.property('price')
+        expect(res.body.food).to.have.property('price')
         .equal(500);
-        expect(res.body.order[0]).to.have.property('quantity')
+        expect(res.body).to.have.property('quantity')
         .equal(4);
-        expect(res.body.order[0]).to.have.property('status')
+        expect(res.body).to.have.property('orderStatus')
         .equal('completed');
-        expect(res.body.order[0]).to.have.property('date')
+        expect(res.body).to.have.property('date')
         .equal('2018-09-01');
         done();
       });
