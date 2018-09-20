@@ -63,13 +63,74 @@ describe('Order Endpoints', () => {
         done();
       });
   });
-  it('should not add order, if body is incomplete', (done) => {
+  it('should not add order, if userId, foodId or foodDescription is empty', (done) => {
     chai.request(server)
       .post('/api/v1/orders')
       .send({
+        userId: 3,
         foodId: '',
-        price: 1000,
+        foodDescription: 'jollof rice',
+        foodImageURL: 'jollof.png',
+        foodPrice: 1000,
         quantity: 1,
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+        .equal('Incomplete parameters');
+        done();
+      });
+  });
+  it('should not add order, if foodImageURL, foodPrice or quantity is empty', (done) => {
+    chai.request(server)
+      .post('/api/v1/orders')
+      .send({
+        userId: 3,
+        foodId: 4,
+        foodDescription: 'jollof rice',
+        foodImageURL: 'jollof.png',
+        foodPrice: 1000,
+        quantity: ''
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+        .equal('Incomplete parameters');
+        done();
+      });
+  });
+  it('should not add order, if userId, foodId or foodDescription is undefined', (done) => {
+    chai.request(server)
+      .post('/api/v1/orders')
+      .send({
+        userId: 3,
+        foodId: 4,
+        foodImageURL: 'jollof.png',
+        foodPrice: 1000,
+        quantity: 3
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+        .equal('Incomplete parameters');
+        done();
+      });
+  });
+  it('should not add order, if foodImageURL, foodPrice or quantity is undefined', (done) => {
+    chai.request(server)
+      .post('/api/v1/orders')
+      .send({
+        userId: 3,
+        foodId: 4,
+        foodDescription: 'jollof rice',
+        foodImageURL: 'jollof.png',
+        quantity: 2
       })
       .end((err, res) => {
         res.should.have.status(400);
