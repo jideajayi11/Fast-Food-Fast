@@ -5,7 +5,7 @@ const adminModel = [
 		phoneNumber: '08012345678',
 		email: 'kobis@gmail.com',
 		password: 'qwerty',
-		date: '2018-09-01'
+		date: '2018-09-01',
 	},
 	{
 		id: 2,
@@ -13,7 +13,7 @@ const adminModel = [
 		phoneNumber: '08112345678',
 		email: 'chickr@gmail.com',
 		password: 'qwerty',
-		date: '2018-07-21'
+		date: '2018-07-21',
 	},
 	{
 		id: 3,
@@ -21,7 +21,7 @@ const adminModel = [
 		phoneNumber: '07012345678',
 		email: 'kfc@gmail.com',
 		password: 'qwerty',
-		date: '2018-05-16'
+		date: '2018-05-16',
 	},
 ];
 export default adminModel;

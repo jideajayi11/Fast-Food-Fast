@@ -6,7 +6,7 @@ const userModel = [
 		phoneNumber: '08012345678',
 		email: 'tayo@gmail.com',
 		password: 'qwerty',
-		date: '2018-09-01'
+		date: '2018-09-01',
 	},
 	{
 		id: 2,
@@ -15,7 +15,7 @@ const userModel = [
 		phoneNumber: '08112345678',
 		email: 'bisi@gmail.com',
 		password: 'qwerty',
-		date: '2018-07-21'
+		date: '2018-07-21',
 	},
 	{
 		id: 3,
@@ -24,7 +24,7 @@ const userModel = [
 		phoneNumber: '07012345678',
 		email: 'deejay@gmail.com',
 		password: 'qwerty',
-		date: '2018-05-16'
+		date: '2018-05-16',
 	},
 ];
 export default userModel;
