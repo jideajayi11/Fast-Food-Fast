@@ -10,10 +10,10 @@ class Order {
       });
     }
 
-return res.status(404).json({
-        error: 404,
-        message: 'Not found',
-      });
+    return res.status(404).json({
+      error: 404,
+      message: 'Not found',
+    });
   }
 
   static getOrder(req, res, next) {
@@ -27,10 +27,10 @@ return res.status(404).json({
       });
     }
 
-return res.status(404).json({
-        error: 404,
-        message: 'Not found',
-      });
+    return res.status(404).json({
+      error: 404,
+      message: 'Not found',
+    });
   }
 
   static addOrder(req, res, next) {
@@ -51,17 +51,7 @@ return res.status(404).json({
     order.push(orderItem);
 
     return res.status(201).json({
-      id: lastId + 1,
-      userId: req.body.userId,
-      food: {
-        id: req.body.foodId,
-        description: req.body.foodDescription,
-        imageURL: req.body.foodImageURL,
-        price: req.body.foodPrice,
-      },
-      quantity: req.body.quantity,
-      orderStatus: 'pending',
-      date: Date(),
+      order: orderItem,
       status: 'success',
       message: 'Order Added',
     });
@@ -70,7 +60,7 @@ return res.status(404).json({
   static updateOrder(req, res, next) {
     const id = req.params.id;
     const index = order.findIndex(item => item.id == id);
-    order.splice(index, 1, {
+    const orderItem = {
       id: order[index].id,
       userId: order[index].userId,
       food: {
@@ -82,20 +72,11 @@ return res.status(404).json({
       quantity: order[index].quantity,
       orderStatus: req.body.orderStatus,
       date: order[index].date,
-    });
+    };
+    order.splice(index, 1, orderItem);
 
     return res.status(200).json({
-      id: order[index].id,
-      userId: order[index].userId,
-      food: {
-        id: order[index].food.id,
-        description: order[index].food.description,
-        imageURL: order[index].food.imageURL,
-        price: order[index].food.price,
-      },
-      quantity: order[index].quantity,
-      orderStatus: order[index].orderStatus,
-      date: order[index].date,
+      order: orderItem,
       status: 'success',
       message: 'Order Updated',
     });
