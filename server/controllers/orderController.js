@@ -21,7 +21,7 @@ return res.status(404).json({
     const orderItem = order.filter(item => item.id == id);
     if (orderItem.length == 1) {
       return res.status(200).json({
-        orderItem,
+        order: orderItem[0],
         status: 'success',
         message: 'Order found',
       });

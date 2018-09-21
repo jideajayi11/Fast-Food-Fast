@@ -28,17 +28,17 @@ describe('Order Endpoints', () => {
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message')
         .equal('Order found');
-        expect(res.body.orderItem[0]).to.have.property('userId')
+        expect(res.body.order).to.have.property('userId')
         .equal(3);
-        expect(res.body.orderItem[0].food)
+        expect(res.body.order.food)
         .to.have.property('id').equal(8);
-        expect(res.body.orderItem[0].food)
+        expect(res.body.order.food)
         .to.have.property('price').equal(500);
-        expect(res.body.orderItem[0]).to.have.property('quantity')
+        expect(res.body.order).to.have.property('quantity')
         .equal(4);
-        expect(res.body.orderItem[0]).to.have.property('orderStatus')
+        expect(res.body.order).to.have.property('orderStatus')
         .equal('pending');
-        expect(res.body.orderItem[0]).to.have.property('date')
+        expect(res.body.order).to.have.property('date')
         .equal('2018-09-01');
         done();
       });
