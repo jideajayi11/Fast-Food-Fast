@@ -1,7 +1,8 @@
 import chai from 'chai';
 import { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import server from '..';
+import server from '../index';
+import GenValid from '../helpers/validator/index';
 
 const should = chai.should();
 chai.use(chaiHttp);
@@ -15,7 +16,7 @@ describe('Order Endpoints', () => {
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message')
-        .equal('Retrieved all your orders');
+          .equal('Retrieved all your orders');
         done();
       });
   });
@@ -27,19 +28,19 @@ describe('Order Endpoints', () => {
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message')
-        .equal('Order found');
-        expect(res.body.orderItem[0]).to.have.property('userId')
-        .equal(3);
-        expect(res.body.orderItem[0].food)
-        .to.have.property('id').equal(8);
-        expect(res.body.orderItem[0].food)
-        .to.have.property('price').equal(500);
-        expect(res.body.orderItem[0]).to.have.property('quantity')
-        .equal(4);
-        expect(res.body.orderItem[0]).to.have.property('orderStatus')
-        .equal('pending');
-        expect(res.body.orderItem[0]).to.have.property('date')
-        .equal('2018-09-01');
+          .equal('Order found');
+        expect(res.body.order).to.have.property('userId')
+          .equal(3);
+        expect(res.body.order.food)
+          .to.have.property('id').equal(8);
+        expect(res.body.order.food)
+          .to.have.property('price').equal(500);
+        expect(res.body.order).to.have.property('quantity')
+          .equal(4);
+        expect(res.body.order).to.have.property('orderStatus')
+          .equal('pending');
+        expect(res.body.order).to.have.property('date')
+          .equal('2018-09-01');
         done();
       });
   });
@@ -59,7 +60,7 @@ describe('Order Endpoints', () => {
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message')
-        .equal('Order Added');
+          .equal('Order Added');
         done();
       });
   });
@@ -79,7 +80,7 @@ describe('Order Endpoints', () => {
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('error');
         expect(res.body).to.have.property('message')
-        .equal('Incomplete parameters');
+          .equal('Incomplete parameters');
         done();
       });
   });
@@ -99,7 +100,7 @@ describe('Order Endpoints', () => {
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('error');
         expect(res.body).to.have.property('message')
-        .equal('Incomplete parameters');
+          .equal('Incomplete parameters');
         done();
       });
   });
@@ -118,7 +119,7 @@ describe('Order Endpoints', () => {
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('error');
         expect(res.body).to.have.property('message')
-        .equal('Incomplete parameters');
+          .equal('Incomplete parameters');
         done();
       });
   });
@@ -137,7 +138,47 @@ describe('Order Endpoints', () => {
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('error');
         expect(res.body).to.have.property('message')
-        .equal('Incomplete parameters');
+          .equal('Incomplete parameters');
+        done();
+      });
+  });
+  it('should not add order, if userId or foodId is not a number', (done) => {
+    chai.request(server)
+      .post('/api/v1/orders')
+      .send({
+        userId: 'uy',
+        foodId: 1,
+        foodDescription: 'jollof rice',
+        foodImageURL: 'jollof.png',
+        foodPrice: 1000,
+        quantity: 2
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('userId, foodId must be Numbers');
+        done();
+      });
+  });
+  it('should not add order, if food price or quantity is not a number', (done) => {
+    chai.request(server)
+      .post('/api/v1/orders')
+      .send({
+        userId: 5,
+        foodId: 4,
+        foodDescription: 'jollof rice',
+        foodImageURL: 'jollof.png',
+        foodPrice: 'ui',
+        quantity: 2
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('food price and quantity must be Numbers');
         done();
       });
   });
@@ -152,19 +193,34 @@ describe('Order Endpoints', () => {
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message')
-        .equal('Order Updated');
-        expect(res.body).to.have.property('userId')
-        .equal(3);
-        expect(res.body.food).to.have.property('id')
-        .equal(8);
-        expect(res.body.food).to.have.property('price')
-        .equal(500);
-        expect(res.body).to.have.property('quantity')
-        .equal(4);
-        expect(res.body).to.have.property('orderStatus')
-        .equal('completed');
-        expect(res.body).to.have.property('date')
-        .equal('2018-09-01');
+          .equal('Order Updated');
+        expect(res.body.order).to.have.property('userId')
+          .equal(3);
+        expect(res.body.order.food).to.have.property('id')
+          .equal(8);
+        expect(res.body.order.food).to.have.property('price')
+          .equal(500);
+        expect(res.body.order).to.have.property('quantity')
+          .equal(4);
+        expect(res.body.order).to.have.property('orderStatus')
+          .equal('completed');
+        expect(res.body.order).to.have.property('date')
+          .equal('2018-09-01');
+        done();
+      });
+  });
+  it('should not update an order, if params is not integer', (done) => {
+    chai.request(server)
+      .put('/api/v1/orders/ty')
+      .send({
+        orderStatus: 'completed',
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Invalid Parameter');
         done();
       });
   });
@@ -179,8 +235,22 @@ describe('Order Endpoints', () => {
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('error');
         expect(res.body).to.have.property('message')
-        .equal('Invalid Status');
+          .equal('Invalid Status');
         done();
       });
+  });
+});
+describe('General validation functions', () => {
+  it('should return true for a positive integer', (done) => {
+    expect(GenValid.isInteger(57)).to.equal(true);
+    done();
+  });
+  it('should return true for a positive number', (done) => {
+    expect(GenValid.isNumber(57.78)).to.equal(true);
+    done();
+  });
+  it('should return true for an email address', (done) => {
+    expect(GenValid.isEmail('jideajayi11@gmail.com')).to.equal(true);
+    done();
   });
 });
