@@ -1,5 +1,5 @@
 import { Pool } from 'pg';
-import tables from './tables.sql';
+import tables from './tablesSql';
 import env from 'dotenv';
 
 env.config();
@@ -8,7 +8,7 @@ let parameters = {};
 if (process.env.NODE_ENV === 'test') {
   parameters = {
 		user: 'postgres',
-		host: 'localhost',
+		host: 'travis',
 		database: 'travis_ci_test',
 		password: '',
 		port: process.env.PORT
@@ -21,8 +21,8 @@ if (process.env.NODE_ENV === 'test') {
 const pool = new Pool(parameters);
 if(pool.connect())
 	console.log('connected to db');
-
+/*
 pool.query(tables, (err, res) => {
 	console.log(err, res);
-});
+});*/
 export default pool;
