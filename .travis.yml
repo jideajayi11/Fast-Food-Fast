@@ -11,7 +11,7 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-  - psql -c "CREATE DATABASE travis;" -U postgres
+  - psql -c "CREATE DATABASE travis_ci_test;" -U postgres
 script:
   - npm test
 cache:
