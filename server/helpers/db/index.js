@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'test') {
   parameters = {
 		user: 'postgres',
 		host: 'localhost',
-		database: 'testing_db',
+		database: 'travis',
 		password: '',
 		port: process.env.PORT
 	};
