@@ -8,7 +8,7 @@ let parameters = {};
 if (process.env.NODE_ENV === 'test') {
   parameters = {
 		user: 'postgres',
-		host: 'travis',
+		host: 'localhost',
 		database: 'travis_ci_test',
 		password: '',
 		port: process.env.PORT
@@ -21,8 +21,8 @@ if (process.env.NODE_ENV === 'test') {
 const pool = new Pool(parameters);
 if(pool.connect())
 	console.log('connected to db');
-/*
+
 pool.query(tables, (err, res) => {
-	console.log(err, res);
-});*/
+	//console.log(err, res);
+});
 export default pool;

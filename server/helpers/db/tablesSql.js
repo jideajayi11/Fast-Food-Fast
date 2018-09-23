@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS orders (
 	id serial NOT NULL PRIMARY KEY,
 	quantity integer NOT NULL,
 	orderStatus varchar NOT NULL,
-	price DECIMAL NOT NULL,
+	price float NOT NULL,
 	userId integer NOT NULL,
 	adminId integer NOT NULL,
 	foodId integer NOT NULL,

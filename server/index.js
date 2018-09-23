@@ -4,7 +4,6 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 import env from 'dotenv';
 import orderRoute from './routes/orderRoute';
-import pool from './helpers/db';
 
 
 env.config();
@@ -26,5 +25,5 @@ app.set('port', port);
 const server = http.createServer(app);
 server.listen(port);
 console.log('connected to port');
-pool;
+
 export default server;

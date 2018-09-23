@@ -50,10 +50,11 @@ describe('Order Endpoints', () => {
       .send({
         userId: 1,
         foodId: 5,
-        foodDescription: 'Fried Rice & Chicken',
-        foodImageURL: 'friedRiceChicken.jpg',
+        adminId: 3,
         foodPrice: 1000,
         quantity: 1,
+        foodDescription: 1,
+        foodImageURL: 1
       })
       .end((err, res) => {
         res.should.have.status(201);
