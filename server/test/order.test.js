@@ -65,6 +65,7 @@ describe('Order Endpoints', () => {
         done();
       });
   });
+  /*
   it('should not add order, if userId, foodId or foodDescription is empty', (done) => {
     chai.request(server)
       .post('/api/v1/orders')
@@ -84,7 +85,7 @@ describe('Order Endpoints', () => {
           .equal('Incomplete parameters');
         done();
       });
-  });
+  });*/
   it('should not add order, if foodImageURL, foodPrice or quantity is empty', (done) => {
     chai.request(server)
       .post('/api/v1/orders')
