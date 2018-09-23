@@ -1,16 +1,32 @@
 import { Pool } from 'pg';
-import sql from './test.sql';
+import sqlTest from './test.sql';
+import sqlDev from './development.sql';
 import env from 'dotenv';
 
 env.config();
 
-const pool = new Pool({
-  connectionString: 'postgres://gvapmdrf:eNa70-_RZPVdkOCsA14WWuXRMusEXzh9@baasu.db.elephantsql.com:5432/gvapmdrf'
-});
+let parameters = {};
+let tables;
+if (process.env.NODE_ENV === 'test') {
+  parameters = {
+		user: 'postgres',
+		host: 'localhost',
+		database: 'testing_db',
+		password: '',
+		port: process.env.PORT
+	};
+	tables = sqlTest;
+} else {
+	parameters = {
+		connectionString: process.env.DB_PATH
+	};
+	tables = sqlDev;
+}
+const pool = new Pool(parameters);
 if(pool.connect())
 	console.log('connected to db');
 
-pool.query(sql, (err, res) => {
+pool.query(tables, (err, res) => {
 	console.log(err, res);
 });
 export default pool;
