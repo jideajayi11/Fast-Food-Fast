@@ -7,11 +7,7 @@ env.config();
 let parameters = {};
 if (process.env.NODE_ENV === 'test') {
   parameters = {
-		user: 'postgres',
-		host: 'localhost',
-		database: 'travis_ci_test',
-		password: '',
-		port: process.env.PORT
+		connectionString: process.env.DB_PATH_TEST
 	};
 } else {
 	parameters = {

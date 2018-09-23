@@ -58,7 +58,7 @@ class Order {
         status: 'success',
         message: 'Order Added',
       });
-    }).catch(e => console.error(e.stack));
+    }).catch(e => next(e));
   }
 
   static updateOrder(req, res, next) {
