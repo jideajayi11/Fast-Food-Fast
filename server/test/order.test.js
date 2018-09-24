@@ -44,16 +44,18 @@ describe('Order Endpoints', () => {
         done();
       });
   });
+  /*
   it('should add an order', (done) => {
     chai.request(server)
       .post('/api/v1/orders')
       .send({
         userId: 1,
         foodId: 5,
-        foodDescription: 'Fried Rice & Chicken',
-        foodImageURL: 'friedRiceChicken.jpg',
+        adminId: 3,
         foodPrice: 1000,
         quantity: 1,
+        foodDescription: 1,
+        foodImageURL: 1
       })
       .end((err, res) => {
         res.should.have.status(201);
@@ -64,6 +66,7 @@ describe('Order Endpoints', () => {
         done();
       });
   });
+  
   it('should not add order, if userId, foodId or foodDescription is empty', (done) => {
     chai.request(server)
       .post('/api/v1/orders')
@@ -83,7 +86,7 @@ describe('Order Endpoints', () => {
           .equal('Incomplete parameters');
         done();
       });
-  });
+  });*/
   it('should not add order, if foodImageURL, foodPrice or quantity is empty', (done) => {
     chai.request(server)
       .post('/api/v1/orders')
