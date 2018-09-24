@@ -19,6 +19,6 @@ if(pool.connect())
 	console.log('connected to db');
 
 pool.query(tables, (err, res) => {
-	//console.log(err, res);
+	console.log(err, res);
 });
 export default pool;
