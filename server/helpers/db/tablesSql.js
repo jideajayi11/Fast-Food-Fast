@@ -30,7 +30,10 @@ CREATE TABLE IF NOT EXISTS orders (
 	userId integer NOT NULL,
 	adminId integer NOT NULL,
 	foodId integer NOT NULL,
-	date varchar NOT NULL DEFAULT CURRENT_TIMESTAMP
+	date varchar NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (adminId) REFERENCES admin(id),
+    FOREIGN KEY (userId) REFERENCES users(id),
+    FOREIGN KEY (foodId) REFERENCES food(id)
 );
 
 
@@ -38,9 +41,10 @@ CREATE TABLE IF NOT EXISTS food (
 	id serial NOT NULL PRIMARY KEY,
 	foodName varchar NOT NULL,
 	imageURL varchar NOT NULL,
-	price DECIMAL NOT NULL,
+	price float NOT NULL,
 	adminId integer NOT NULL,
-	date varchar NOT NULL DEFAULT CURRENT_TIMESTAMP
+	date varchar NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (adminId) REFERENCES admin(id)
 ); `;
 
 export default sql;
