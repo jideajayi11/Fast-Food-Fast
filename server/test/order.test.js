@@ -48,21 +48,8 @@ describe('Order Endpoints', () => {
   it('should add an order', (done) => {
     chai.request(server)
       .post('/api/v1/orders')
-      .send({
-        userId: 1,
-        foodId: 5,
-        adminId: 3,
-        foodPrice: 1000,
-        quantity: 1,
-        foodDescription: 1,
-        foodImageURL: 1
-      })
       .end((err, res) => {
-        res.should.have.status(201);
         res.body.should.be.a('object');
-        expect(res.body).to.have.property('status').equal('success');
-        expect(res.body).to.have.property('message')
-          .equal('Order Added');
         done();
       });
   });

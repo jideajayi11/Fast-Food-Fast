@@ -8,9 +8,6 @@ CREATE TABLE IF NOT EXISTS users (
 	password varchar NOT NULL,
 	date varchar NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-
-
-
 CREATE TABLE IF NOT EXISTS admin (
 	id serial NOT NULL PRIMARY KEY,
 	restaurantName varchar NOT NULL,
@@ -19,9 +16,15 @@ CREATE TABLE IF NOT EXISTS admin (
 	password varchar NOT NULL,
 	date varchar NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
-
-
-
+CREATE TABLE IF NOT EXISTS food (
+	id serial NOT NULL PRIMARY KEY,
+	foodName varchar NOT NULL,
+	imageURL varchar NOT NULL,
+	price float NOT NULL,
+	adminId integer NOT NULL,
+	date varchar NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (adminId) REFERENCES admin(id)
+);
 CREATE TABLE IF NOT EXISTS orders (
 	id serial NOT NULL PRIMARY KEY,
 	quantity integer NOT NULL,
@@ -34,17 +37,6 @@ CREATE TABLE IF NOT EXISTS orders (
     FOREIGN KEY (adminId) REFERENCES admin(id),
     FOREIGN KEY (userId) REFERENCES users(id),
     FOREIGN KEY (foodId) REFERENCES food(id)
-);
-
-
-CREATE TABLE IF NOT EXISTS food (
-	id serial NOT NULL PRIMARY KEY,
-	foodName varchar NOT NULL,
-	imageURL varchar NOT NULL,
-	price float NOT NULL,
-	adminId integer NOT NULL,
-	date varchar NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (adminId) REFERENCES admin(id)
 ); `;
 
 export default sql;

@@ -23,10 +23,7 @@ describe('Authentication Endpoints', () => {
       .end((err, res) => {
         res.should.have.status(201);
         res.body.should.be.a('object');
-        expect(res.body.user).to.have.property('fullName').equal('jide ajayi');
-        expect(res.body.user).to.have.property('phoneNumber').equal('12345678');
-        expect(res.body.user).to.have.property('deliveryAddress').equal('my address');
-        expect(res.body.user).to.have.property('email').equal('my@email3.com');
+        expect(res.body).to.have.property('token');
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message')
           .equal('User account was created');
@@ -86,7 +83,7 @@ describe('Authentication Endpoints', () => {
         confirmPassword: 'qwerty2'
       })
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(403);
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('error');
         expect(res.body).to.have.property('message')
@@ -102,12 +99,12 @@ describe('Authentication Endpoints', () => {
         fullName: 'jide ajayi',
         phoneNumber: '12345678',
         deliveryAddress: 'my address',
-        email: 'my@email1.com',
+        email: 'my@email3.com',
         password: 'qwerty',
         confirmPassword: 'qwerty'
       })
       .end((err, res) => {
-        res.should.have.status(400);
+        res.should.have.status(403);
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('error');
         expect(res.body).to.have.property('message')
