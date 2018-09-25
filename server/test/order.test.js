@@ -44,7 +44,7 @@ describe('Order Endpoints', () => {
         done();
       });
   });
-  /*
+  
   it('should add an order', (done) => {
     chai.request(server)
       .post('/api/v1/orders')
@@ -86,7 +86,7 @@ describe('Order Endpoints', () => {
           .equal('Incomplete parameters');
         done();
       });
-  });*/
+  });
   it('should not add order, if foodImageURL, foodPrice or quantity is empty', (done) => {
     chai.request(server)
       .post('/api/v1/orders')
@@ -241,19 +241,5 @@ describe('Order Endpoints', () => {
           .equal('Invalid Status');
         done();
       });
-  });
-});
-describe('General validation functions', () => {
-  it('should return true for a positive integer', (done) => {
-    expect(GenValid.isInteger(57)).to.equal(true);
-    done();
-  });
-  it('should return true for a positive number', (done) => {
-    expect(GenValid.isNumber(57.78)).to.equal(true);
-    done();
-  });
-  it('should return true for an email address', (done) => {
-    expect(GenValid.isEmail('jideajayi11@gmail.com')).to.equal(true);
-    done();
   });
 });

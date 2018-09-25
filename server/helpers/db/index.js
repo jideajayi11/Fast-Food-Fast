@@ -15,8 +15,8 @@ if (process.env.NODE_ENV === 'test') {
 	};
 }
 const pool = new Pool(parameters);
-if(pool.connect())
-	console.log('connected to db');
+//pool.connect();
+console.log('connected to db');
 
 pool.query(tables, (err, res) => {
 	console.log(err, res);

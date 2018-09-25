@@ -4,8 +4,7 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 import env from 'dotenv';
 import orderRoute from './routes/orderRoute';
-import pool from './helpers/db/';
-
+import authRoute from './routes/authRoute';
 
 env.config();
 
@@ -20,12 +19,12 @@ app.get('/', (req, res) => res.status(200).send({
   + 'service app for restaurants',
 }));
 
+authRoute(app);
 orderRoute(app);
 
 app.set('port', port);
 const server = http.createServer(app);
 server.listen(port);
 console.log('connected to port');
-pool;
 
 export default server;
