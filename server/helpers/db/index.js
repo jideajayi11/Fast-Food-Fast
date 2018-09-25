@@ -1,5 +1,5 @@
 import { Pool } from 'pg';
-import tables from './tablesSql';
+import sql from './tablesSql';
 import env from 'dotenv';
 
 env.config();
@@ -18,7 +18,7 @@ const pool = new Pool(parameters);
 //pool.connect();
 console.log('connected to db');
 
-pool.query(tables, (err, res) => {
-	console.log(err, res);
+pool.query(sql, () => {
+	console.log('tables created');
 });
 export default pool;
