@@ -31,12 +31,10 @@ class Validate {
             status: 'error',
             message: 'Email address already exists',
           });
-        } else {
-          next();
         }
       });
-      next();
     }
+    next();
   }
 
 }

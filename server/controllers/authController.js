@@ -25,8 +25,7 @@ class Auth {
               status: 'success',
               message: 'User account was created',
             });
-          })
-          .catch((e) => console.log(e));
+          });
       });
     });
   }
