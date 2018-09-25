@@ -16,7 +16,7 @@ describe('Authentication Endpoints', () => {
         fullName: 'jide ajayi',
         phoneNumber: '12345678',
         deliveryAddress: 'my address',
-        email: 'my@email2.com',
+        email: 'my@email3.com',
         password: 'qwerty',
         confirmPassword: 'qwerty'
       })
@@ -26,7 +26,7 @@ describe('Authentication Endpoints', () => {
         expect(res.body.user).to.have.property('fullName').equal('jide ajayi');
         expect(res.body.user).to.have.property('phoneNumber').equal('12345678');
         expect(res.body.user).to.have.property('deliveryAddress').equal('my address');
-        expect(res.body.user).to.have.property('email').equal('my@email2.com');
+        expect(res.body.user).to.have.property('email').equal('my@email3.com');
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message')
           .equal('User account was created');
