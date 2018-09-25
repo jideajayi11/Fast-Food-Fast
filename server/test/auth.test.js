@@ -99,7 +99,7 @@ describe('Authentication Endpoints', () => {
         fullName: 'jide ajayi',
         phoneNumber: '12345678',
         deliveryAddress: 'my address',
-        email: 'my@email3.com',
+        email: 'my@email1.com',
         password: 'qwerty',
         confirmPassword: 'qwerty'
       })
