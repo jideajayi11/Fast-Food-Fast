@@ -1,5 +1,5 @@
 import order from '../models/orderModel';
-import db from '../helpers/db/';
+import db from '../helpers/db';
 
 class Order {
   static getOrders(req, res, next) {
@@ -39,26 +39,26 @@ class Order {
       text: `INSERT INTO orders(quantity, price, userId, adminId, foodId, orderStatus)
        VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
       values: [req.body.quantity, req.body.foodPrice, req.body.userId,
-         req.body.adminId, req.body.foodId, 'new']
+        req.body.adminId, req.body.foodId, 'new']
     };
     db.query(addOrderQuery)
-    .then(data => {
-      const orderItem = {
-        id: data.rows[0].id,
-        userId: data.rows[0].userid,
-        foodId: data.rows[0].foodid,
-        adminId: data.rows[0].adminid,
-        price: data.rows[0].price,
-        quantity: data.rows[0].quantity,
-        orderStatus: data.rows[0].orderstatus,
-        date: data.rows[0].date,
-      };
-      return res.status(201).json({
-        order: orderItem,
-        status: 'success',
-        message: 'Order Added',
+      .then((data) => {
+        const orderItem = {
+          id: data.rows[0].id,
+          userId: data.rows[0].userid,
+          foodId: data.rows[0].foodid,
+          adminId: data.rows[0].adminid,
+          price: data.rows[0].price,
+          quantity: data.rows[0].quantity,
+          orderStatus: data.rows[0].orderstatus,
+          date: data.rows[0].date,
+        };
+        return res.status(201).json({
+          order: orderItem,
+          status: 'success',
+          message: 'Order Added',
+        });
       });
-    })
   }
 
   static updateOrder(req, res, next) {

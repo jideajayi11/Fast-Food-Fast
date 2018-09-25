@@ -8,7 +8,6 @@ chai.use(chaiHttp);
 
 
 describe('Authentication Endpoints', () => {
-  
   it('should signup a user', (done) => {
     chai.request(server)
       .post('/api/v1/auth/signup')
@@ -112,6 +111,4 @@ describe('Authentication Endpoints', () => {
         done();
       });
   });
-  
-  
 });

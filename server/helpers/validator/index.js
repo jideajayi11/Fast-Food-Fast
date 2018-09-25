@@ -11,12 +11,11 @@ class Validate {
     return /^.+@.+\..+$/.test(value);
   }
 
-  static isRequired (value) {
-    if(value === '' || value === undefined) {
+  static isRequired(value) {
+    if (value === '' || value === undefined) {
       return false;
-    }else {
-      return true;
     }
+    return true;
   }
 }
 export default Validate;

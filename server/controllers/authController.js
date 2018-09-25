@@ -1,7 +1,8 @@
 import jwt from 'jsonwebtoken';
-import db from '../helpers/db';
 import bcrypt from 'bcryptjs';
 import env from 'dotenv';
+import db from '../helpers/db';
+
 env.config();
 
 class Auth {
@@ -14,10 +15,10 @@ class Auth {
         [req.body.fullName, req.body.phoneNumber, req.body.deliveryAddress,
           req.body.email, hash])
           .then((data) => {
-            const token = jwt.sign({ 
+            const token = jwt.sign({
               email: data.rows[0].email,
-              userId: data.rows[0].id 
-            }, process.env.JWT_KEY, { 
+              userId: data.rows[0].id
+            }, process.env.JWT_KEY, {
               expiresIn: 86400
             });
             res.status(201).json({
@@ -28,6 +29,10 @@ class Auth {
           });
       });
     });
+  }
+
+  static userSignin(req, res, next) {
+
   }
 }
 
