@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
 import db from '../helpers/db';
 import bcrypt from 'bcryptjs';
+import env from 'dotenv';
+env.config();
 
 class Auth {
   static userSignup(req, res, next) {
@@ -23,7 +25,8 @@ class Auth {
               status: 'success',
               message: 'User account was created',
             });
-          });
+          })
+          .catch((e) => console.log(e));
       });
     });
   }
