@@ -21,7 +21,7 @@ class Auth {
             }, process.env.JWT_KEY, {
               expiresIn: 86400
             });
-            res.status(201).json({
+            return res.status(201).json({
               token,
               status: 'success',
               message: 'User account was created',
