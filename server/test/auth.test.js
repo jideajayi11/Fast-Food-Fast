@@ -91,27 +91,4 @@ describe('Authentication Endpoints', () => {
         done();
       });
   });
-  it(`should not signup a user, if 
-     email exists`, (done) => {
-    chai.request(server)
-      .post('/api/v1/auth/signup')
-      .send({
-        fullName: 'jide ajayi',
-        phoneNumber: '12345678',
-        deliveryAddress: 'my address',
-        email: 'my@email1.com',
-        password: 'qwerty',
-        confirmPassword: 'qwerty'
-      })
-      .end((err, res) => {
-        res.should.have.status(403);
-        res.body.should.be.a('object');
-        expect(res.body).to.have.property('status').equal('error');
-        expect(res.body).to.have.property('message')
-          .equal('Email address already exists');
-        done();
-      });
-  });
-  
-  
 });

@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS users (
 	fullName varchar NOT NULL,
 	phoneNumber varchar NOT NULL,
 	deliveryAddress varchar NOT NULL,
-	email varchar NOT NULL,
+	email varchar NOT NULL UNIQUE,
 	password varchar NOT NULL,
 	date varchar NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS admin (
 	id serial NOT NULL PRIMARY KEY,
 	restaurantName varchar NOT NULL,
 	phoneNumber varchar NOT NULL,
-	email varchar NOT NULL,
+	email varchar NOT NULL UNIQUE,
 	password varchar NOT NULL,
 	date varchar NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
