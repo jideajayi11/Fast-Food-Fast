@@ -20,8 +20,6 @@ describe('Authentication Endpoints for users', () => {
         confirmPassword: 'qwerty'
       })
       .end((err, res) => {
-        console.log(err);
-        console.log(res.body);
         res.should.have.status(201);
         res.body.should.be.a('object');
         expect(res.body).to.have.property('token');
@@ -174,6 +172,106 @@ describe('Authentication Endpoints for users', () => {
         expect(res.body).to.have.property('status').equal('error');
         expect(res.body).to.have.property('message')
           .equal('Authentication failed. Invalid password.');
+        done();
+      });
+  });
+});
+describe('Authentication Endpoints for Admin', () => {
+  it('should signup admin', (done) => {
+    chai.request(server)
+      .post('/api/v1/admin/signup')
+      .send({
+        restaurant: 'jide ajayi',
+        phoneNumber: '12345678',
+        email: 'my@email3.com',
+        password: 'qwerty',
+        confirmPassword: 'qwerty'
+      })
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('token');
+        expect(res.body).to.have.property('status').equal('success');
+        expect(res.body).to.have.property('message')
+          .equal('Admin account was created');
+        done();
+      });
+  });
+  it(`should not signup admin, if 
+     required field is empty`, (done) => {
+    chai.request(server)
+      .post('/api/v1/admin/signup')
+      .send({
+        restaurant: 'jide ajayi',
+        phoneNumber: '12345678',
+        email: 'my@email.com'
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Incomplete signup details');
+        done();
+      });
+  });
+  it(`should not signup admin, if 
+     email is not valid`, (done) => {
+    chai.request(server)
+      .post('/api/v1/admin/signup')
+      .send({
+        restaurant: 'jide ajayi',
+        phoneNumber: '12345678',
+        email: 'my email',
+        password: 'qwerty',
+        confirmPassword: 'qwerty'
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Invalid email address');
+        done();
+      });
+  });
+  it(`should not signup admin, if 
+     password is mismatched`, (done) => {
+    chai.request(server)
+      .post('/api/v1/admin/signup')
+      .send({
+        restaurant: 'jide ajayi',
+        phoneNumber: '12345678',
+        email: 'my@email.com',
+        password: 'qwerty1',
+        confirmPassword: 'qwerty2'
+      })
+      .end((err, res) => {
+        res.should.have.status(403);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Password do not match');
+        done();
+      });
+  });
+  it(`should not signup a admin, if 
+     email exists`, (done) => {
+    chai.request(server)
+      .post('/api/v1/admin/signup')
+      .send({
+        restaurant: 'jide ajayi',
+        phoneNumber: '12345678',
+        email: 'my@email3.com',
+        password: 'qwerty',
+        confirmPassword: 'qwerty'
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Email already exist');
         done();
       });
   });

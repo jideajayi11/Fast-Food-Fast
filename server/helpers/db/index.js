@@ -1,6 +1,5 @@
 import { Pool } from 'pg';
 import env from 'dotenv';
-import sql from './tablesSql';
 
 env.config();
 
