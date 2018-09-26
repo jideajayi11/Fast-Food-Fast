@@ -34,7 +34,13 @@ class Validate {
         status: 'error',
         message: 'Incomplete signin details',
       });
+    } if (!(GenValid.isEmail(req.body.email))) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid email address',
+      });
     }
+    next();
   }
 }
 export default Validate;
