@@ -28,6 +28,7 @@ class Auth {
             });
           })
           .catch(err => {
+            console.log(err);
             if(err.code == '23505'){
               return res.status(403).json({
                 status: 'error',
