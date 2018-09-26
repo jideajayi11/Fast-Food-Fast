@@ -44,7 +44,7 @@ describe('Order Endpoints', () => {
         done();
       });
   });
-  
+
   it('should add an order', (done) => {
     chai.request(server)
       .post('/api/v1/orders')
@@ -53,7 +53,7 @@ describe('Order Endpoints', () => {
         done();
       });
   });
-  
+
   it('should not add order, if userId, foodId or foodDescription is empty', (done) => {
     chai.request(server)
       .post('/api/v1/orders')

@@ -3,5 +3,7 @@ import Validate from '../helpers/validator/auth';
 
 export default (app) => {
   app.post('/api/v1/auth/signup',
-   Validate.userSignup, Auth.userSignup);
+    Validate.userSignup, Auth.userSignup);
+  app.post('/api/v1/auth/login',
+    Validate.userSignin, Auth.userSignin);
 };
