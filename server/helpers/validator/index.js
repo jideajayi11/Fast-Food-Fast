@@ -10,5 +10,13 @@ class Validate {
   static isEmail(value) {
     return /^.+@.+\..+$/.test(value);
   }
+
+  static isRequired (value) {
+    if(value === '' || value === undefined) {
+      return false;
+    }else {
+      return true;
+    }
+  }
 }
 export default Validate;

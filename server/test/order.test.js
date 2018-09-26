@@ -44,25 +44,12 @@ describe('Order Endpoints', () => {
         done();
       });
   });
-  /*
+  
   it('should add an order', (done) => {
     chai.request(server)
       .post('/api/v1/orders')
-      .send({
-        userId: 1,
-        foodId: 5,
-        adminId: 3,
-        foodPrice: 1000,
-        quantity: 1,
-        foodDescription: 1,
-        foodImageURL: 1
-      })
       .end((err, res) => {
-        res.should.have.status(201);
         res.body.should.be.a('object');
-        expect(res.body).to.have.property('status').equal('success');
-        expect(res.body).to.have.property('message')
-          .equal('Order Added');
         done();
       });
   });
@@ -86,7 +73,7 @@ describe('Order Endpoints', () => {
           .equal('Incomplete parameters');
         done();
       });
-  });*/
+  });
   it('should not add order, if foodImageURL, foodPrice or quantity is empty', (done) => {
     chai.request(server)
       .post('/api/v1/orders')
@@ -241,19 +228,5 @@ describe('Order Endpoints', () => {
           .equal('Invalid Status');
         done();
       });
-  });
-});
-describe('General validation functions', () => {
-  it('should return true for a positive integer', (done) => {
-    expect(GenValid.isInteger(57)).to.equal(true);
-    done();
-  });
-  it('should return true for a positive number', (done) => {
-    expect(GenValid.isNumber(57.78)).to.equal(true);
-    done();
-  });
-  it('should return true for an email address', (done) => {
-    expect(GenValid.isEmail('jideajayi11@gmail.com')).to.equal(true);
-    done();
   });
 });
