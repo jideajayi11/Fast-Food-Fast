@@ -28,6 +28,12 @@ class Auth {
             });
           })
           .catch(err => {
+            if(err.code == '23505'){
+              return res.status(403).json({
+                status: 'error',
+                message: 'Email already exist',
+              });
+            }
             return res.status(500).json({
               status: 'error',
               message: err,
