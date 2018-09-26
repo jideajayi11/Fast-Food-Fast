@@ -30,7 +30,7 @@ class Auth {
           .catch(err => {
             return res.status(500).json({
               status: 'error',
-              message: err.details,
+              message: err,
             });
           });
   }
