@@ -24,16 +24,6 @@ class Validate {
         message: 'Password do not match',
       });
     }
-    db.query('SELECT * FROM users WHERE email = $1', [req.body.email])
-      .then((data) => {
-        if (data.rows[0].email === req.body.email) {
-          return res.status(403).json({
-            status: 'error',
-            message: 'Email address already exists',
-          });
-        }
-      });
-
     next();
   }
 

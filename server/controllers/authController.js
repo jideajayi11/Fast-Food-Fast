@@ -7,9 +7,10 @@ env.config();
 
 class Auth {
   static userSignup(req, res, next) {
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(req.body.password, salt, (err, hash) => {
-        db.query(`INSERT INTO users
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(req.body.password, salt);
+
+    db.query(`INSERT INTO users
         (fullName, phoneNumber, deliveryAddress, email, password)
         VALUES($1, $2, $3, $4, $5) RETURNING *`,
         [req.body.fullName, req.body.phoneNumber, req.body.deliveryAddress,
@@ -26,11 +27,14 @@ class Auth {
               status: 'success',
               message: 'User account was created',
             });
+          })
+          .catch(err => {
+            return res.status(500).json({
+              status: 'error',
+              message: err,
+            });
           });
-      });
-    });
   }
-
   static userSignin(req, res, next) {
 
   }
