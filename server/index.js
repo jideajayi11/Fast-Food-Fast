@@ -5,6 +5,7 @@ import logger from 'morgan';
 import env from 'dotenv';
 import orderRoute from './routes/orderRoute';
 import authRoute from './routes/authRoute';
+import foodRoute from './routes/foodRoute';
 
 env.config();
 
@@ -21,6 +22,7 @@ app.get('/', (req, res) => res.status(200).send({
 
 authRoute(app);
 orderRoute(app);
+foodRoute(app);
 
 app.set('port', port);
 const server = http.createServer(app);

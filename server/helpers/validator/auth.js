@@ -1,5 +1,4 @@
 import GenValid from './index';
-import db from '../db';
 
 class Validate {
   static userSignup(req, res, next) {
@@ -42,7 +41,8 @@ class Validate {
     }
     next();
   }
-  static adminSignup (req, res, next) {
+
+  static adminSignup(req, res, next) {
     if (!(GenValid.isRequired(req.body.restaurant))
        || !(GenValid.isRequired(req.body.phoneNumber))
        || !(GenValid.isRequired(req.body.email))

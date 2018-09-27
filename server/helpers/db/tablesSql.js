@@ -3,7 +3,7 @@ import env from 'dotenv';
 
 env.config();
 
-const pool = new Pool({connectionString: process.env.DB_PATH_TEST});
+const pool = new Pool({ connectionString: process.env.DB_PATH_TEST });
 const sql = `
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS food;
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS admin (
 CREATE TABLE IF NOT EXISTS food (
 	id serial NOT NULL PRIMARY KEY,
 	foodName varchar NOT NULL,
-	imageURL varchar NOT NULL,
+	imageURL varchar NULL,
 	price float NOT NULL,
 	adminId integer NOT NULL,
 	date varchar NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -50,5 +50,5 @@ CREATE TABLE IF NOT EXISTS orders (
 ); `;
 
 export default pool.query(sql, (err, res) => {
-	console.log('created tables');
+  console.log('created tables');
 });
