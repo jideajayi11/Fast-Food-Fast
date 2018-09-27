@@ -7,9 +7,6 @@ env:
   global:
     - CC_TEST_REPORTER_ID=c93aebb200d25ed4d6e14e541d4f82d287591481e9fee7e1ccca7493325d421c
 before_script:
-  - psql -c "create database travis_ci_test;" -U postgres
-  - psql -c "CREATE USER myuser WITH PASSWORD 'keys';" -U postgres
-  - npm run tables
   - chmod 0777 ./node_modules/.bin/mocha
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
