@@ -1,5 +1,4 @@
 import GenValid from './index';
-import db from '../db';
 
 class Validate {
   static userSignup(req, res, next) {

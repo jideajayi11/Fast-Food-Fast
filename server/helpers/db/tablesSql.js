@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS admin (
 CREATE TABLE IF NOT EXISTS food (
 	id serial NOT NULL PRIMARY KEY,
 	foodName varchar NOT NULL,
-	imageURL varchar NOT NULL,
+	imageURL varchar NULL,
 	price float NOT NULL,
 	adminId integer NOT NULL,
 	date varchar NOT NULL DEFAULT CURRENT_TIMESTAMP,
