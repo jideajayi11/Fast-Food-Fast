@@ -5,7 +5,9 @@ export default (app) => {
   app.post('/api/v1/auth/signup',
     Validate.userSignup, Auth.userSignup);
   app.post('/api/v1/auth/login',
-    Validate.userSignin, Auth.userSignin);
-    app.post('/api/v1/admin/signup',
-      Validate.adminSignup, Auth.adminSignup);
+    Validate.signin, Auth.userSignin);
+  app.post('/api/v1/admin/signup',
+    Validate.adminSignup, Auth.adminSignup);
+  app.post('/api/v1/admin/login',
+    Validate.signin, Auth.adminSignin);
 };

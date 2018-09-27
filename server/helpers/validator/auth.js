@@ -27,7 +27,7 @@ class Validate {
     next();
   }
 
-  static userSignin(req, res, next) {
+  static signin(req, res, next) {
     if (!(GenValid.isRequired(req.body.email))
        || !(GenValid.isRequired(req.body.password))) {
       return res.status(400).json({

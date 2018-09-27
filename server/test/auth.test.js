@@ -275,4 +275,37 @@ describe('Authentication Endpoints for Admin', () => {
         done();
       });
   });
+  it(`should signin admin`, (done) => {
+    chai.request(server)
+      .post('/api/v1/admin/login')
+      .send({
+        email: 'my@email3.com',
+        password: 'qwerty'
+      })
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('token')
+        expect(res.body).to.have.property('status').equal('success');
+        expect(res.body).to.have.property('message')
+          .equal('You are now logged in');
+        done();
+      });
+  });
+  it(`should not signin admin for incorrect password`, (done) => {
+    chai.request(server)
+      .post('/api/v1/admin/login')
+      .send({
+        email: 'my@email3.com',
+        password: 'qwerty12'
+      })
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Authentication failed. Invalid password.');
+        done();
+      });
+  });
 });
