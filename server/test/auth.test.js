@@ -2,6 +2,17 @@ import chai from 'chai';
 import { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../index';
+import env from 'dotenv';
+import jwt from 'jsonwebtoken';
+
+env.config();
+
+const token = jwt.sign({
+  email: 'my@email3.com',
+  adminId: 1
+}, process.env.JWT_KEY, {
+  expiresIn: 86400
+});
 
 const should = chai.should();
 chai.use(chaiHttp);
@@ -298,6 +309,27 @@ describe('Authentication Endpoints for Admin', () => {
       .send({
         email: 'my@email3.com',
         password: 'qwerty12'
+      })
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Authentication failed. Invalid password.');
+        done();
+      });
+  });
+});
+describe('Token Verification', () => {
+  it('should validate token', (done) => {
+    chai.request(server)
+      .post('/api/v1/menu')
+      .send({
+        email: 'my@email3.com',
+        password: 'qwerty12'
+      })
+      .set({
+        "x-access-token": token
       })
       .end((err, res) => {
         res.should.have.status(404);
