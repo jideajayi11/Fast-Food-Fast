@@ -100,4 +100,16 @@ describe('Food API Endpoint', () => {
         done();
       });
   });
+  it('should get all food', (done) => {
+    chai.request(server)
+      .get('/api/v1/menu')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('success');
+        expect(res.body).to.have.property('message')
+          .equal('Food List');
+        done();
+      });
+  });
 });
