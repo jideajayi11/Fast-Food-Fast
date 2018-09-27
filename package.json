@@ -19,7 +19,7 @@
     }
   },
   "scripts": {
-    "tables": "babel-node ./server/helpers/db/tablesSql",
+    "pretest": "babel-node ./server/helpers/db/tablesSql",
     "start": "babel-node ./server/index.js",
     "test": "set NODE_ENV=test&&nyc mocha --timeout 10000 --compilers js:babel-core/register --require babel-polyfill ./server/test/**/*.test.js",
     "coveralls": "nyc report --reporter=text-lcov | coveralls && nyc report --reporter=lcov",
