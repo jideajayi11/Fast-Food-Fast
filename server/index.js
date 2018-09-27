@@ -22,7 +22,7 @@ app.get('/', (req, res) => res.status(200).send({
 }));
 
 authRoute(app);
-app.use(verifyToken);
+//app.use(verifyToken);
 foodRoute(app);
 orderRoute(app);
 
