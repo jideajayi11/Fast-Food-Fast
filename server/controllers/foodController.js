@@ -13,6 +13,12 @@ class Food {
 				req.decoded.adminId, req.body.imageURL])
 				.then((data) => {
 					return res.status(201).json({
+						food: {
+							id: data.rows[0].id,
+							description: data.rows[0].foodname,
+							price: data.rows[0].price,
+							adminId: data.rows[0].adminid,
+						},
 						status: 'success',
 						message: 'Food Added',
 					});

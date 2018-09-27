@@ -8,8 +8,8 @@ export default (req, res, next) => {
   if (GenValid.isRequired(token)) {
     jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
       if (err) {
-        return res.json({ 
-					success: 'error',
+        return res.status(403).json({ 
+					status: 'error',
 					message: 'Failed to authenticate token.' 
 				});
       }
@@ -17,8 +17,8 @@ export default (req, res, next) => {
       next();
     });
   } else {
-    return res.status(403).send({
-        success: 'error',
+    return res.status(403).json({
+        status: 'error',
         message: 'No token provided.',
     });
   }

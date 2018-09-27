@@ -13,6 +13,11 @@ class Validate {
         status: 'error',
         message: 'Invalid Price',
       });
+		} if (!(GenValid.isRequired(req.decoded.adminId))) {
+			return res.status(403).json({
+        status: 'error',
+        message: 'Admin is not signed in',
+      });
 		}
     next();
   }
