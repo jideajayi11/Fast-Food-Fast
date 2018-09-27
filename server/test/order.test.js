@@ -6,7 +6,7 @@ import GenValid from '../helpers/validator/index';
 
 const should = chai.should();
 chai.use(chaiHttp);
-/*
+
 describe('Order Endpoints', () => {
   it('should get all orders', (done) => {
     chai.request(server)
@@ -230,4 +230,3 @@ describe('Order Endpoints', () => {
       });
   });
 });
-*/

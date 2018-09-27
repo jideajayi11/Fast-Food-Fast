@@ -22,9 +22,9 @@ app.get('/', (req, res) => res.status(200).send({
 }));
 
 authRoute(app);
+orderRoute(app);
 app.use(verifyToken);
 foodRoute(app);
-orderRoute(app);
 
 app.set('port', port);
 const server = http.createServer(app);
