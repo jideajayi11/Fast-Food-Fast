@@ -3,7 +3,7 @@ import env from 'dotenv';
 
 env.config();
 
-const pool = new Pool({connectionString: process.env.DB_PATH_TEST});
+
 const sql = `
 DROP TABLE IF EXISTS orders;
 DROP TABLE IF EXISTS food;
@@ -49,6 +49,15 @@ CREATE TABLE IF NOT EXISTS orders (
   FOREIGN KEY (foodId) REFERENCES food(id)
 ); `;
 
-export default pool.query(sql, (err, res) => {
-	console.log('created tables');
-});
+const createTables = () => {
+	return new Promise((resolve) => {
+		const pool = new Pool({connectionString: process.env.DB_PATH_TEST});
+		if (pool !== undefined) resolve(pool);
+	}).then((pool) => {
+		pool.query(sql, (err, res) => {
+			console.log('created tables');
+		});
+	})
+}
+
+createTables();
