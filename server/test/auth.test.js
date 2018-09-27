@@ -20,8 +20,6 @@ describe('Authentication Endpoints for users', () => {
         confirmPassword: 'qwerty'
       })
       .end((err, res) => {
-        console.log(err);
-        console.log(res.body);
         res.should.have.status(201);
         res.body.should.be.a('object');
         expect(res.body).to.have.property('token');
