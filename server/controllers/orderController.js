@@ -35,13 +35,10 @@ class Order {
   }
 
   static addOrder(req, res, next) {
-    const addOrderQuery = {
-      text: `INSERT INTO orders(quantity, price, userId, adminId, foodId, orderStatus)
+    db.query(`INSERT INTO orders(quantity, price, userId, adminId, foodId, orderStatus)
        VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
-      values: [req.body.quantity, req.body.foodPrice, req.body.userId,
-        req.body.adminId, req.body.foodId, 'new']
-    };
-    db.query(addOrderQuery)
+      [req.body.quantity, req.body.foodPrice, req.body.userId,
+        req.body.adminId, req.body.foodId, 'new'])
       .then((data) => {
         const orderItem = {
           id: data.rows[0].id,

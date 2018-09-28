@@ -26,7 +26,7 @@ class Verify {
 			});
 		});
   }
-/*
+
   static userToken (req, res, next) {
     const token = req.headers['x-access-token'];
     jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
@@ -47,6 +47,6 @@ class Verify {
         message: 'User not found'
       }));
 		});
-  }*/
+  }
 }
 export default Verify;
