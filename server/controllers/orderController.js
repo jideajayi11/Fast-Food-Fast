@@ -3,17 +3,27 @@ import db from '../helpers/db';
 
 class Order {
   static getOrders(req, res, next) {
-    if (order.length) {
-      return res.status(200).json({
-        order,
-        status: 'success',
-        message: 'Retrieved all your orders',
+    db.query('select * from orders where adminId = $1',
+      ['16'])
+    .then((data) => {
+      if(data.rows[0]) {
+        return res.status(200).json({
+          order: data.rows[0],
+          status: 'success',
+          messsage: 'Retrieved all your orders'
+        });
+      } else {
+        return res.status(404).json({
+          status: 'error',
+          messsage: 'Order not found'
+        });
+      }
+    })
+    .catch((err) => {
+      return res.status(500).json({
+        status: 'error',
+        messsage: err
       });
-    }
-
-    return res.status(404).json({
-      error: 404,
-      message: 'Not found',
     });
   }
 

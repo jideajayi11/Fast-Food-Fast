@@ -25,8 +25,10 @@ class Validate {
         message: 'Invalid orderId',
       });
     }
-    if (req.body.orderStatus === 'New' || req.body.orderStatus === 'Processing'
-     || req.body.orderStatus === 'Cancelled' || req.body.orderStatus === 'Complete') {
+    if (req.body.orderStatus === 'New' 
+     || req.body.orderStatus === 'Processing'
+     || req.body.orderStatus === 'Cancelled' 
+     || req.body.orderStatus === 'Complete') {
       next();
     } else {
       return res.status(400).json({
