@@ -27,8 +27,7 @@ class Food {
       }));
   }
   static getMenu (req, res, next) {
-    db.query('select id, foodname, imageurl, price from food where adminId = $1',
-     [req.decoded.adminId])
+    db.query('select id, foodname, imageurl, price, adminid from food')
     .then(data => res.status(200).json({
       menus: data.rows,
       status: 'success',
