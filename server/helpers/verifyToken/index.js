@@ -42,10 +42,12 @@ class Verify {
 				req.decoded = decoded;
       	next();
       })
-      .catch(err => res.status(404).json({
-        status: 'error',
-        message: 'User not found'
-      }));
+      .catch((err) => {
+				res.status(500).json({
+					status: 'error',
+					message: 'something went wrong'
+				})
+			});
 		});
   }
 }

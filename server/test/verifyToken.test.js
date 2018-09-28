@@ -37,7 +37,7 @@ describe('Verify token', () => {
         done();
       });
   });
-  it('should not auth for invalid token', (done) => {
+  it('should not auth admin for invalid token', (done) => {
     chai.request(server)
       .post('/api/v1/menu')
       .set('x-access-token', token)
@@ -45,6 +45,23 @@ describe('Verify token', () => {
         foodDescription: 'Rice',
         foodPrice: 400,
         imageURL: 'rice.png'
+      })
+      .end((err, res) => {
+        res.should.have.status(403);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Failed to authenticate token.');
+        done();
+      });
+  });
+  it('should not auth user for invalid token', (done) => {
+    chai.request(server)
+      .post('/api/v1/orders')
+      .set('x-access-token', token)
+      .send({
+        quantity: 4,
+        foodId: 1
       })
       .end((err, res) => {
         res.should.have.status(403);
