@@ -22,5 +22,14 @@ class Validate {
     }
     next();
   }
+  static getMenu (req, res, next) {
+    if (!(GenValid.isRequired(req.decoded.adminId))) {
+      return res.status(403).json({
+        status: 'error',
+        message: 'Admin is not signed in',
+      });
+    }
+    next();
+  }
 }
 export default Validate;

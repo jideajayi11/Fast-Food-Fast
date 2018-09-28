@@ -100,4 +100,30 @@ describe('Food API Endpoint', () => {
         done();
       });
   });
+  it('should get all food', (done) => {
+    chai.request(server)
+      .get('/api/v1/menu')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('success');
+        expect(res.body).to.have.property('message')
+          .equal('Food List');
+        done();
+      });
+  });
+  it('should not get all food for user', (done) => {
+    chai.request(server)
+      .get('/api/v1/menu')
+      .set('x-access-token', token2)
+      .end((err, res) => {
+        res.should.have.status(403);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Admin is not signed in');
+        done();
+      });
+  });
 });

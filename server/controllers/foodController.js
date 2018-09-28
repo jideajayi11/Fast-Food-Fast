@@ -26,6 +26,19 @@ class Food {
         message: err,
       }));
   }
+  static getMenu (req, res, next) {
+    db.query('select id, foodname, imageurl, price from food where adminId = $1',
+     [req.decoded.adminId])
+    .then(data => res.status(200).json({
+      menus: data.rows,
+      status: 'success',
+      message: 'Food List',
+    }))
+    .catch(err => res.status(500).json({
+      status: 'error',
+      message: err,
+    }));
+  }
 }
 
 export default Food;
