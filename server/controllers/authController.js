@@ -60,7 +60,7 @@ class Auth {
         }
         return res.status(404).json({
           status: 'error',
-          message: 'Authentication failed. Invalid password.',
+          message: 'Authentication failed.',
         });
       })
       .catch(err => res.status(500).json({
@@ -123,7 +123,7 @@ class Auth {
         }
         return res.status(404).json({
           status: 'error',
-          message: 'Authentication failed. Invalid password.',
+          message: 'Authentication failed.',
         });
       })
       .catch(err => res.status(500).json({

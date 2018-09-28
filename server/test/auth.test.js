@@ -171,7 +171,7 @@ describe('Authentication Endpoints for users', () => {
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('error');
         expect(res.body).to.have.property('message')
-          .equal('Authentication failed. Invalid password.');
+          .equal('Authentication failed.');
         done();
       });
   });
@@ -304,7 +304,7 @@ describe('Authentication Endpoints for Admin', () => {
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('error');
         expect(res.body).to.have.property('message')
-          .equal('Authentication failed. Invalid password.');
+          .equal('Authentication failed.');
         done();
       });
   });
