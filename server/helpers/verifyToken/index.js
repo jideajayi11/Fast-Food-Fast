@@ -26,7 +26,7 @@ class Verify {
 			});
 		});
   }
-/*
+
   static userToken (req, res, next) {
     const token = req.headers['x-access-token'];
     jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
@@ -42,11 +42,13 @@ class Verify {
 				req.decoded = decoded;
       	next();
       })
-      .catch(err => res.status(404).json({
-        status: 'error',
-        message: 'User not found'
-      }));
+      .catch((err) => {
+				res.status(500).json({
+					status: 'error',
+					message: 'something went wrong'
+				})
+			});
 		});
-  }*/
+  }
 }
 export default Verify;

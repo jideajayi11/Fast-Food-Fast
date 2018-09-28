@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS orders (
 	adminId integer NOT NULL,
 	foodId integer NOT NULL,
 	date varchar NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (adminId) REFERENCES admin(id),
   FOREIGN KEY (userId) REFERENCES users(id),
+  FOREIGN KEY (adminId) REFERENCES admin(id),
   FOREIGN KEY (foodId) REFERENCES food(id)
 ); `;
 

@@ -35,30 +35,26 @@ class Order {
   }
 
   static addOrder(req, res, next) {
-    const addOrderQuery = {
-      text: `INSERT INTO orders(quantity, price, userId, adminId, foodId, orderStatus)
-       VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
-      values: [req.body.quantity, req.body.foodPrice, req.body.userId,
-        req.body.adminId, req.body.foodId, 'new']
-    };
-    db.query(addOrderQuery)
-      .then((data) => {
-        const orderItem = {
-          id: data.rows[0].id,
-          userId: data.rows[0].userid,
-          foodId: data.rows[0].foodid,
-          adminId: data.rows[0].adminid,
-          price: data.rows[0].price,
-          quantity: data.rows[0].quantity,
-          orderStatus: data.rows[0].orderstatus,
-          date: data.rows[0].date,
-        };
+		db.query('select adminid, price from food where id = $1',
+			[req.body.foodId])
+		.then((data) => {
+      db.query(`INSERT INTO orders(quantity, foodId, price, adminId, userId, orderStatus)
+       VALUES($1, $2, $3, $4, $5, $6)`,
+      [req.body.quantity, req.body.foodId, data.rows[0].price, data.rows[0].adminid,
+        req.decoded.userId, 'New'])
+      .then((data2) => {
         return res.status(201).json({
-          order: orderItem,
           status: 'success',
-          message: 'Order Added',
+          messsage: 'Order Created'
         });
+      })
+    })
+    .catch(() => {
+      return res.status(404).json({
+        status: 'error',
+        messsage: 'Food not found'
       });
+    });
   }
 
   static updateOrder(req, res, next) {

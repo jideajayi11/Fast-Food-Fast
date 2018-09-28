@@ -2,39 +2,22 @@ import GenValid from './index';
 
 class Validate {
   static addOrder(req, res, next) {
-    if (req.body.userId === '' || req.body.foodId === ''
-     || req.body.foodDescription === '') {
+    if (!(GenValid.isRequired(req.body.foodId))
+     || !(GenValid.isRequired(req.body.quantity))) {
       return res.status(400).json({
         status: 'error',
         message: 'Incomplete parameters',
       });
-    } if (req.body.foodImageURL === '' || req.body.foodPrice === ''
-     || req.body.quantity === '') {
+    }  if (!(GenValid.isInteger(req.body.quantity))
+     || !(GenValid.isInteger(req.body.foodId))) {
       return res.status(400).json({
         status: 'error',
-        message: 'Incomplete parameters',
+        message: 'quantity, foodId must be Numbers'
       });
-    } if (req.body.userId === undefined || req.body.foodId === undefined
-     || req.body.foodDescription === undefined) {
-      return res.status(400).json({
+    } if (!(GenValid.isRequired(req.decoded.userId))) {
+      return res.status(403).json({
         status: 'error',
-        message: 'Incomplete parameters',
-      });
-    } if (req.body.foodImageURL === undefined || req.body.foodPrice === undefined
-     || req.body.quantity === undefined) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'Incomplete parameters',
-      });
-    } if (!(GenValid.isInteger(req.body.userId)) || !(GenValid.isInteger(req.body.foodId))) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'userId, foodId must be Numbers'
-      });
-    } if (!(GenValid.isNumber(req.body.foodPrice)) || !(GenValid.isInteger(req.body.quantity))) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'food price and quantity must be Numbers'
+        message: 'User is not signed in',
       });
     }
     next();
