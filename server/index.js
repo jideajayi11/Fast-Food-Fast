@@ -6,7 +6,6 @@ import env from 'dotenv';
 import orderRoute from './routes/orderRoute';
 import authRoute from './routes/authRoute';
 import foodRoute from './routes/foodRoute';
-import verifyToken from './helpers/verifyToken';
 
 env.config();
 
@@ -23,7 +22,6 @@ app.get('/', (req, res) => res.status(200).send({
 
 authRoute(app);
 orderRoute(app);
-app.use(verifyToken);
 foodRoute(app);
 
 app.set('port', port);
