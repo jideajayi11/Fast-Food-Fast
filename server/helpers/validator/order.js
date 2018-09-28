@@ -46,5 +46,14 @@ class Validate {
       });
     }
   }
+  static getOrder(req, res, next) {
+    if (!(GenValid.isInteger(req.params.orderId))) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid orderId',
+      });
+    }
+    next();
+  }
 }
 export default Validate;
