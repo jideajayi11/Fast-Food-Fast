@@ -148,57 +148,78 @@ describe('Order Endpoints', () => {
   it('should update an order', (done) => {
     chai.request(server)
       .put('/api/v1/orders/1')
+      .set('x-access-token', token)
       .send({
-        orderStatus: 'completed',
+        orderStatus: 'Complete',
       })
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('success');
+        done();
+      });
+  });
+	
+  it('should update, order not found', (done) => {
+    chai.request(server)
+      .put('/api/v1/orders/100')
+      .set('x-access-token', token)
+      .send({
+        orderStatus: 'Complete',
+      })
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        done();
+      });
+  });
+	
+  it('should not update an order with user token', (done) => {
+    chai.request(server)
+      .put('/api/v1/orders/1')
+      .set('x-access-token', token2)
+      .send({
+        orderStatus: 'Complete',
+      })
+      .end((err, res) => {
+        res.should.have.status(403);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
         expect(res.body).to.have.property('message')
-          .equal('Order Updated');
-        expect(res.body.order).to.have.property('userId')
-          .equal(3);
-        expect(res.body.order.food).to.have.property('id')
-          .equal(8);
-        expect(res.body.order.food).to.have.property('price')
-          .equal(500);
-        expect(res.body.order).to.have.property('quantity')
-          .equal(4);
-        expect(res.body.order).to.have.property('orderStatus')
-          .equal('completed');
-        expect(res.body.order).to.have.property('date')
-          .equal('2018-09-01');
+          .equal('Admin is not signed in');
         done();
       });
   });
   it('should not update an order, if params is not integer', (done) => {
     chai.request(server)
       .put('/api/v1/orders/ty')
+      .set('x-access-token', token)
       .send({
-        orderStatus: 'completed',
+        orderStatus: 'Complete',
       })
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('error');
         expect(res.body).to.have.property('message')
-          .equal('Invalid Parameter');
+          .equal('Invalid orderId');
         done();
       });
   });
   it('should not update order with invalid status', (done) => {
     chai.request(server)
       .put('/api/v1/orders/1')
+      .set('x-access-token', token)
       .send({
-        status: 'pend',
+        orderStatus: 'pend',
       })
       .end((err, res) => {
         res.should.have.status(400);
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('error');
         expect(res.body).to.have.property('message')
-          .equal('Invalid Status');
+          .equal('Invalid orderStatus');
         done();
       });
   });

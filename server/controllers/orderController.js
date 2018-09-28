@@ -58,27 +58,20 @@ class Order {
   }
 
   static updateOrder(req, res, next) {
-    const id = req.params.id;
-    const index = order.findIndex(item => item.id == id);
-    const orderItem = {
-      id: order[index].id,
-      userId: order[index].userId,
-      food: {
-        id: order[index].food.id,
-        description: order[index].food.description,
-        imageURL: order[index].food.imageURL,
-        price: order[index].food.price,
-      },
-      quantity: order[index].quantity,
-      orderStatus: req.body.orderStatus,
-      date: order[index].date,
-    };
-    order.splice(index, 1, orderItem);
-
-    return res.status(200).json({
-      order: orderItem,
-      status: 'success',
-      message: 'Order Updated',
+    db.query('update orders set  orderstatus = $1 where id = $2 RETURNING *',
+      [req.body.orderStatus, req.params.orderId])
+    .then((data) => {
+      if(data.rows[0]) {
+        return res.status(200).json({
+          status: 'success',
+          messsage: 'Order was updated'
+        });
+      } else {
+        return res.status(404).json({
+          status: 'error',
+          messsage: 'Order not found'
+        });
+      }
     });
   }
 }

@@ -24,19 +24,25 @@ class Validate {
   }
 
   static updateOrder(req, res, next) {
-    if (!(GenValid.isInteger(req.params.id))) {
-      return res.status(400).json({
+    if (!(GenValid.isRequired(req.decoded.adminId))) {
+      return res.status(403).json({
         status: 'error',
-        message: 'Invalid Parameter',
+        message: 'Admin is not signed in',
       });
     }
-    if (req.body.orderStatus == 'pending' || req.body.orderStatus == 'accepted'
-     || req.body.orderStatus == 'declined' || req.body.orderStatus == 'completed') {
+    if (!(GenValid.isInteger(req.params.orderId))) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid orderId',
+      });
+    }
+    if (req.body.orderStatus === 'New' || req.body.orderStatus === 'Processing'
+     || req.body.orderStatus === 'Cancelled' || req.body.orderStatus === 'Complete') {
       next();
     } else {
       return res.status(400).json({
         status: 'error',
-        message: 'Invalid Status',
+        message: 'Invalid orderStatus',
       });
     }
   }
