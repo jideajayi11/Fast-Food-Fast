@@ -190,18 +190,6 @@ describe('Order Endpoints', () => {
         done();
       });
   });
-	it('should get all orders', (done) => {
-    chai.request(server)
-      .get('/api/v1/orders')
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.should.be.a('object');
-        expect(res.body).to.have.property('status').equal('success');
-        expect(res.body).to.have.property('message')
-          .equal('Retrieved all your orders');
-        done();
-      });
-  });
   it('should get an order', (done) => {
     chai.request(server)
       .get('/api/v1/orders/1')
@@ -212,6 +200,19 @@ describe('Order Endpoints', () => {
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message')
           .equal('Order found');
+        done();
+      });
+  });
+  it('should not get an order, bad orderId', (done) => {
+    chai.request(server)
+      .get('/api/v1/orders/%')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        res.should.have.status(500);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Something is not right!');
         done();
       });
   });
@@ -268,7 +269,7 @@ describe('Order Endpoints', () => {
   });
   it('should get admin orders', (done) => {
     chai.request(server)
-      .get('/api/v1/users/1/orders')
+      .get('/api/v1/orders')
       .set('x-access-token', token)
       .end((err, res) => {
         res.should.have.status(200);

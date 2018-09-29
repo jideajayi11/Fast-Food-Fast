@@ -23,6 +23,13 @@ app.get('/', (req, res) => res.status(200).send({
 authRoute(app);
 orderRoute(app);
 foodRoute(app);
+app.use(function (err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).json({
+    status: 'error',
+    message: 'Something is not right!',
+  });
+});
 
 app.set('port', port);
 const server = http.createServer(app);

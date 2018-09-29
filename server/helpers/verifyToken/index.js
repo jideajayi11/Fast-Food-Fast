@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import env from 'dotenv';
 import db from '../db';
-import GenValid from '../validator/index';
+import GenValid from '../validator';
 
 class Verify {
   static adminToken (req, res, next) {
