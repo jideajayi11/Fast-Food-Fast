@@ -44,5 +44,14 @@ class Validate {
     }
     next();
   }
+  static getUserOrders(req, res, next) {
+    if (!(GenValid.isInteger(req.params.userId))) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid userId',
+      });
+    }
+    next();
+  }
 }
 export default Validate;
