@@ -14,22 +14,11 @@ class Validate {
         status: 'error',
         message: 'quantity, foodId must be Numbers'
       });
-    } if (!(GenValid.isRequired(req.decoded.userId))) {
-      return res.status(403).json({
-        status: 'error',
-        message: 'User is not signed in',
-      });
     }
     next();
   }
 
   static updateOrder(req, res, next) {
-    if (!(GenValid.isRequired(req.decoded.adminId))) {
-      return res.status(403).json({
-        status: 'error',
-        message: 'Admin is not signed in',
-      });
-    }
     if (!(GenValid.isInteger(req.params.orderId))) {
       return res.status(400).json({
         status: 'error',
@@ -45,6 +34,15 @@ class Validate {
         message: 'Invalid orderStatus',
       });
     }
+  }
+  static getOrder(req, res, next) {
+    if (!(GenValid.isInteger(req.params.orderId))) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid orderId',
+      });
+    }
+    next();
   }
 }
 export default Validate;

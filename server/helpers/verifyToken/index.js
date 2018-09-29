@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import env from 'dotenv';
 import db from '../db';
+import GenValid from '../validator/index';
 
 class Verify {
   static adminToken (req, res, next) {
@@ -15,6 +16,12 @@ class Verify {
       db.query('select * from admin where id = $1',
        [decoded.adminId])
       .then((data) => {
+        if (!(GenValid.isRequired(decoded.adminId))) {
+          return res.status(403).json({
+            status: 'error',
+            message: 'Admin is not signed in',
+          });
+        }
         req.decoded = decoded;
         next();
       })
@@ -39,6 +46,12 @@ class Verify {
       db.query('select * from users where id = $1',
        [decoded.userId])
       .then((data) => {
+        if (!(GenValid.isRequired(decoded.userId))) {
+          return res.status(403).json({
+            status: 'error',
+            message: 'User is not signed in',
+          });
+        }
 				req.decoded = decoded;
       	next();
       })

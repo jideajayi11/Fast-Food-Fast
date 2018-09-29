@@ -18,20 +18,58 @@ class Order {
   }
 
   static getOrder(req, res, next) {
-    const id = req.params.id;
-    const orderItem = order.filter(item => item.id == id);
-    if (orderItem.length == 1) {
-      return res.status(200).json({
-        order: orderItem[0],
-        status: 'success',
-        message: 'Order found',
-      });
-    }
+		let order;
+    db.query('select * from orders where id = $1',
+			[req.params.orderId])
+		.then((data1) => {
+      order = data1.rows[0];
 
-    return res.status(404).json({
-      error: 404,
-      message: 'Not found',
+      db.query(`select fullName, phoneNumber, deliveryAddress 
+      from users where id = $1`, [order.userid])
+      .then((data) => {
+        order = {
+          id: order.id,
+          quantity: order.quantity,
+          price: order.price,
+          user: {
+            fullName: data.rows[0].fullname,
+            phoneNumber: data.rows[0].phonenumber,
+            deliveryAddress: data.rows[0].deliveryaddress
+          },
+          orderstatus: order.orderstatus,
+          date: order.date,
+          foodid: order.foodid
+        };
+      });
+      db.query('select foodName, imageURL from food where id = $1',
+        [order.foodid])
+      .then((data) => {
+        order = {
+          id: order.id,
+          food: {
+            quantity: order.quantity,
+            price: order.price,
+            foodName: data.rows[0].foodname,
+            imageURL: data.rows[0].imageurl
+          },
+          user: order.user,
+          orderstatus: order.orderstatus,
+          date: order.date
+        };
+        return res.status(200).json({
+          order,
+          status: 'success',
+          message: 'Order found',
+        });
+      });
+		})
+    .catch(() => {
+      return res.status(404).json({
+        status: 'error',
+        message: 'Order not found'
+      });
     });
+    
   }
 
   static addOrder(req, res, next) {
@@ -45,14 +83,14 @@ class Order {
       .then((data2) => {
         return res.status(201).json({
           status: 'success',
-          messsage: 'Order Created'
+          message: 'Order Created'
         });
       })
     })
     .catch(() => {
       return res.status(404).json({
         status: 'error',
-        messsage: 'Food not found'
+        message: 'Food not found'
       });
     });
   }
@@ -64,12 +102,12 @@ class Order {
       if(data.rows[0]) {
         return res.status(200).json({
           status: 'success',
-          messsage: 'Order was updated'
+          message: 'Order was updated'
         });
       } else {
         return res.status(404).json({
           status: 'error',
-          messsage: 'Order not found'
+          message: 'Order not found'
         });
       }
     });
