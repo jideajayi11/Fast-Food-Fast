@@ -241,5 +241,30 @@ describe('Order Endpoints', () => {
         done();
       });
   });
+  it('should get user order history', (done) => {
+    chai.request(server)
+      .get('/api/v1/users/1/orders')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('orders')
+        expect(res.body).to.have.property('status').equal('success');
+        expect(res.body).to.have.property('message')
+          .equal('Orders found');
+        done();
+      });
+  });
+  it('should not get user order history, invalid userid', (done) => {
+    chai.request(server)
+      .get('/api/v1/users/user/orders')
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Invalid userId');
+        done();
+      });
+  });
 
 });

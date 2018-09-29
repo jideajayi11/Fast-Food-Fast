@@ -17,6 +17,17 @@ class Order {
     });
   }
 
+  static getUserOrders(req, res, next) {
+    db.query('select * from orders where userId = $1',
+			[req.params.userId])
+		.then((data1) => {
+			return res.status(200).json({
+				orders: data1.rows,
+				status: 'success',
+				message: 'Orders found',
+			});
+    })
+  }
   static getOrder(req, res, next) {
 		let order;
     db.query('select * from orders where id = $1',
@@ -112,5 +123,6 @@ class Order {
       }
     });
   }
+	
 }
 export default Order;
