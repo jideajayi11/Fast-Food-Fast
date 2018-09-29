@@ -66,7 +66,7 @@ class Order {
     .catch(() => {
       return res.status(404).json({
         status: 'error',
-        messsage: 'Order not found'
+        message: 'Order not found'
       });
     });
     
@@ -83,14 +83,14 @@ class Order {
       .then((data2) => {
         return res.status(201).json({
           status: 'success',
-          messsage: 'Order Created'
+          message: 'Order Created'
         });
       })
     })
     .catch(() => {
       return res.status(404).json({
         status: 'error',
-        messsage: 'Food not found'
+        message: 'Food not found'
       });
     });
   }
@@ -102,12 +102,12 @@ class Order {
       if(data.rows[0]) {
         return res.status(200).json({
           status: 'success',
-          messsage: 'Order was updated'
+          message: 'Order was updated'
         });
       } else {
         return res.status(404).json({
           status: 'error',
-          messsage: 'Order not found'
+          message: 'Order not found'
         });
       }
     });
