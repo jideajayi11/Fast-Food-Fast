@@ -266,5 +266,19 @@ describe('Order Endpoints', () => {
         done();
       });
   });
+  it('should get admin orders', (done) => {
+    chai.request(server)
+      .get('/api/v1/users/1/orders')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('orders')
+        expect(res.body).to.have.property('status').equal('success');
+        expect(res.body).to.have.property('message')
+          .equal('Orders found');
+        done();
+      });
+  });
 
 });
