@@ -40,24 +40,39 @@ describe('Order Endpoints', () => {
   it('should get an order', (done) => {
     chai.request(server)
       .get('/api/v1/orders/1')
+      .set('x-access-token', token)
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message')
           .equal('Order found');
-        expect(res.body.order).to.have.property('userId')
-          .equal(3);
-        expect(res.body.order.food)
-          .to.have.property('id').equal(8);
-        expect(res.body.order.food)
-          .to.have.property('price').equal(500);
-        expect(res.body.order).to.have.property('quantity')
-          .equal(4);
-        expect(res.body.order).to.have.property('orderStatus')
-          .equal('pending');
-        expect(res.body.order).to.have.property('date')
-          .equal('2018-09-01');
+        done();
+      });
+  });
+  it('did not find order', (done) => {
+    chai.request(server)
+      .get('/api/v1/orders/10000000')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Order not found');
+        done();
+      });
+  });
+  it('should not get order for invalid parameter', (done) => {
+    chai.request(server)
+      .get('/api/v1/orders/ab')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Invalid orderId');
         done();
       });
   });
