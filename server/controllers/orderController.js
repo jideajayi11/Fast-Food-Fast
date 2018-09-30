@@ -3,28 +3,26 @@ import db from '../helpers/db';
 
 class Order {
   static getOrders(req, res, next) {
-    if (order.length) {
+    db.query('SELECT * FROM orders where adminId = $1',
+      [req.decoded.adminId])
+    .then((data) => { 
       return res.status(200).json({
-        order,
+        orders: data.rows,
         status: 'success',
-        message: 'Retrieved all your orders',
+        message: 'Orders found'
       });
-    }
-
-    return res.status(404).json({
-      error: 404,
-      message: 'Not found',
+      
     });
   }
 
   static getUserOrders(req, res, next) {
     db.query('select * from orders where userId = $1',
 			[req.params.userId])
-		.then((data1) => {
+		.then((data) => {
 			return res.status(200).json({
-				orders: data1.rows,
+				orders: data.rows,
 				status: 'success',
-				message: 'Orders found',
+				message: 'Orders found'
 			});
     })
   }

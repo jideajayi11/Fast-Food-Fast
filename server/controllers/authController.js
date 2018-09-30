@@ -37,7 +37,7 @@ class Auth {
         }
         return res.status(500).json({
           status: 'error',
-          message: err,
+          message: 'Authentication failed.',
         });
       });
   }
@@ -65,7 +65,7 @@ class Auth {
       })
       .catch(err => res.status(500).json({
         status: 'error',
-        message: err,
+        message: 'Signin failed.',
       }));
   }
 
@@ -100,7 +100,7 @@ class Auth {
         }
         return res.status(500).json({
           status: 'error',
-          message: err,
+          message: 'Authentication failed.',
         });
       });
   }
@@ -128,7 +128,7 @@ class Auth {
       })
       .catch(err => res.status(500).json({
         status: 'error',
-        message: err,
+        message: 'Signin failed.',
       }));
   }
 }

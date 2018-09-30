@@ -128,6 +128,22 @@ describe('Authentication Endpoints for users', () => {
         done();
       });
   });
+  it('should not signin a user, email does not exist', (done) => {
+    chai.request(server)
+      .post('/api/v1/auth/login')
+      .send({
+        email: 'notfound@email.com',
+        password: 'qwerty'
+      })
+      .end((err, res) => {
+        res.should.have.status(500);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Signin failed.');
+        done();
+      });
+  });
   it('should not signin a user for empty input', (done) => {
     chai.request(server)
       .post('/api/v1/auth/login')
@@ -289,6 +305,22 @@ describe('Authentication Endpoints for Admin', () => {
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message')
           .equal('You are now logged in');
+        done();
+      });
+  });
+  it('should not signin admin, email does not exist', (done) => {
+    chai.request(server)
+      .post('/api/v1/admin/login')
+      .send({
+        email: 'notfound@email.com',
+        password: 'qwerty'
+      })
+      .end((err, res) => {
+        res.should.have.status(500);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Signin failed.');
         done();
       });
   });
