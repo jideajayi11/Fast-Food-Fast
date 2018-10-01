@@ -13,4 +13,6 @@ export default (app) => {
    Validate.addOrder, Order.addOrder);
   app.put('/api/v1/orders/:orderId', Verify.adminToken,
    Validate.updateOrder, Order.updateOrder);
+  app.put('/api/v1/cancel/:orderId', Verify.userToken,
+   Validate.getOrder, Order.cancelOrder);
 };
