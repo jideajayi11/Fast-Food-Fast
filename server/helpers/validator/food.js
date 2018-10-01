@@ -17,6 +17,22 @@ class Validate {
     }
     next();
   }
+  static updateMenu(req, res, next) {
+    if (!(GenValid.isInteger(req.params.foodId)) && GenValid.isRequired(req.params.foodId)) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid foodId',
+      });
+    } if (!(GenValid.isRequired(req.body.foodDescription))
+    && !(GenValid.isRequired(req.body.foodPrice))
+    && !(GenValid.isRequired(req.body.imageURL))) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Description, Price or Image URL must be updated',
+      });
+    }
+    next();
+  }
   static deleteMenu(req, res, next) {
     if (!(GenValid.isInteger(req.params.foodId))) {
       return res.status(400).json({

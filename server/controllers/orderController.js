@@ -105,8 +105,9 @@ class Order {
   }
 
   static updateOrder(req, res, next) {
-    db.query('update orders set  orderstatus = $1 where id = $2 RETURNING *',
-      [req.body.orderStatus, req.params.orderId])
+    db.query(`update orders set  orderstatus = $1
+     where id = $2 AND adminId = $3 RETURNING *`,
+      [req.body.orderStatus, req.params.orderId, req.decoded.adminId])
     .then((data) => {
       if(data.rows[0]) {
         return res.status(200).json({
