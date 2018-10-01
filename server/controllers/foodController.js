@@ -44,10 +44,6 @@ class Food {
       status: 'success',
       message: 'Food deleted',
     }))
-    .catch(err => res.status(500).json({
-      status: 'error',
-      message: err,
-    }));
   }
 }
 

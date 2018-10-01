@@ -112,9 +112,30 @@ describe('Food API Endpoint', () => {
         done();
       });
   });
+  it('should add another food', (done) => {
+    chai.request(server)
+      .post('/api/v1/menu')
+      .set('x-access-token', token)
+      .send({
+        foodDescription: 'Rice',
+        foodPrice: 400,
+        imageURL: 'rice.png'
+      })
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.be.a('object');
+        expect(res.body.food).to.have.property('description').equal('Rice');
+        expect(res.body.food).to.have.property('price').equal(400);
+        expect(res.body.food).to.have.property('adminId').equal(1);
+        expect(res.body).to.have.property('status').equal('success');
+        expect(res.body).to.have.property('message')
+          .equal('Food Added');
+        done();
+      });
+  });
   it('should delete food', (done) => {
     chai.request(server)
-      .delete('/api/v1/menu/1')
+      .delete('/api/v1/menu/2')
       .set('x-access-token', token)
       .end((err, res) => {
         res.should.have.status(200);
