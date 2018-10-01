@@ -38,6 +38,17 @@ class Food {
       message: err,
     }));
   }
+  static deleteMenu (req, res, next) {
+    db.query('delete from food where id = $1', [req.params.foodId])
+    .then(data => res.status(200).json({
+      status: 'success',
+      message: 'Food deleted',
+    }))
+    .catch(err => res.status(500).json({
+      status: 'error',
+      message: err,
+    }));
+  }
 }
 
 export default Food;

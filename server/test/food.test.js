@@ -112,4 +112,30 @@ describe('Food API Endpoint', () => {
         done();
       });
   });
+  it('should delete food', (done) => {
+    chai.request(server)
+      .delete('/api/v1/menu/1')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('success');
+        expect(res.body).to.have.property('message')
+          .equal('Food deleted');
+        done();
+      });
+  });
+  it('should not delete food', (done) => {
+    chai.request(server)
+      .delete('/api/v1/menu/aa')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Invalid foodId');
+        done();
+      });
+  });
 });
