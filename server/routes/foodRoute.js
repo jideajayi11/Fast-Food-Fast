@@ -4,10 +4,10 @@ import Verify from '../helpers/verifyToken';
 
 export default (app) => {
   app.post('/api/v1/menu', Verify.adminToken,
-   Validate.addMenu, Food.addMenu);
+   Validate.foodBody, Food.addMenu);
   app.put('/api/v1/menu/:foodId', Verify.adminToken,
-   Validate.updateMenu, Food.updateMenu);
+   Validate.foodBody, Validate.foodParams, Food.updateMenu);
   app.delete('/api/v1/menu/:foodId', Verify.adminToken,
-   Validate.deleteMenu, Food.deleteMenu);
+   Validate.foodParams, Food.deleteMenu);
   app.get('/api/v1/menu', Food.getMenu);
 };

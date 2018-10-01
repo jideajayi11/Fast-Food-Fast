@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import env from 'dotenv';
 import db from '../helpers/db';
+import GenValid from '../helpers/validator';
 
 env.config();
 
@@ -27,17 +28,22 @@ class Food {
       }));
   }
   static updateMenu (req, res, next) {
-    let text = 'update food set';
-    db.query('select id, foodname, imageurl, price, adminid from food')
-    .then(data => res.status(200).json({
-      menus: data.rows,
-      status: 'success',
-      message: 'Food List',
-    }))
-    .catch(err => res.status(500).json({
-      status: 'error',
-      message: err,
-    }));
+    db.query(`update food set foodName = $1, price = $2, imageURL = $3 
+      where id = $4 AND adminId = $5 RETURNING *`,
+      [req.body.foodDescription, req.body.foodPrice, 
+      req.body.imageURL, req.params.foodId, req.decoded.adminId])
+    .then((data) => {
+      if(data.rows[0]) {
+        return res.status(200).json({
+          status: 'success',
+          message: 'Food updated',
+        });
+      }
+      return res.status(404).json({
+        status: 'error',
+        message: 'Food not found',
+      });
+    });
   }
   static getMenu (req, res, next) {
     db.query('select id, foodname, imageurl, price, adminid from food')
