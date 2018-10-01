@@ -10,4 +10,5 @@ export default (app) => {
     Validate.adminSignup, Auth.adminSignup);
   app.post('/api/v1/admin/login',
     Validate.signin, Auth.adminSignin);
+  app.get('/api/v1/admin', Auth.restaurant);
 };
