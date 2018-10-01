@@ -38,6 +38,23 @@ class Food {
       message: err,
     }));
   }
+  static deleteMenu (req, res, next) {
+    db.query('delete from food where id = $1 AND adminId = $2 RETURNING *',
+     [req.params.foodId, req.decoded.adminId])
+    .then((data) => {
+      if(data.rows[0]) {
+        res.status(200).json({
+          status: 'success',
+          message: 'Food deleted',
+        })
+      } else {
+        res.status(404).json({
+          status: 'error',
+          message: 'Food not found',
+        })
+      }
+    });
+  }
 }
 
 export default Food;

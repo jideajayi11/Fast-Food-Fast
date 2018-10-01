@@ -13,6 +13,12 @@ const token = jwt.sign({
 }, process.env.JWT_KEY, {
   expiresIn: 86400
 });
+const token3 = jwt.sign({
+  email: 'my@email113.com',
+  adminId: 1
+}, process.env.JWT_KEY, {
+  expiresIn: 86400
+});
 const token2 = jwt.sign({
   email: 'my@email.com',
   userId: 1
@@ -109,6 +115,66 @@ describe('Food API Endpoint', () => {
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message')
           .equal('Food List');
+        done();
+      });
+  });
+  it('should add another food', (done) => {
+    chai.request(server)
+      .post('/api/v1/menu')
+      .set('x-access-token', token)
+      .send({
+        foodDescription: 'Rice',
+        foodPrice: 400,
+        imageURL: 'rice.png'
+      })
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.be.a('object');
+        expect(res.body.food).to.have.property('description').equal('Rice');
+        expect(res.body.food).to.have.property('price').equal(400);
+        expect(res.body.food).to.have.property('adminId').equal(1);
+        expect(res.body).to.have.property('status').equal('success');
+        expect(res.body).to.have.property('message')
+          .equal('Food Added');
+        done();
+      });
+  });
+  it('should delete food', (done) => {
+    chai.request(server)
+      .delete('/api/v1/menu/2')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('success');
+        expect(res.body).to.have.property('message')
+          .equal('Food deleted');
+        done();
+      });
+  });
+  it('should not delete food of other admin', (done) => {
+    chai.request(server)
+      .delete('/api/v1/menu/2')
+      .set('x-access-token', token3)
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Food not found');
+        done();
+      });
+  });
+  it('should not delete food', (done) => {
+    chai.request(server)
+      .delete('/api/v1/menu/aa')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        res.should.have.status(400);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Invalid foodId');
         done();
       });
   });

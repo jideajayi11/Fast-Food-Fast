@@ -17,5 +17,14 @@ class Validate {
     }
     next();
   }
+  static deleteMenu(req, res, next) {
+    if (!(GenValid.isInteger(req.params.foodId))) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid foodId',
+      });
+    }
+    next();
+  }
 }
 export default Validate;
