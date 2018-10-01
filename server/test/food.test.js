@@ -13,6 +13,12 @@ const token = jwt.sign({
 }, process.env.JWT_KEY, {
   expiresIn: 86400
 });
+const token3 = jwt.sign({
+  email: 'my@email113.com',
+  adminId: 1
+}, process.env.JWT_KEY, {
+  expiresIn: 86400
+});
 const token2 = jwt.sign({
   email: 'my@email.com',
   userId: 1
@@ -143,6 +149,19 @@ describe('Food API Endpoint', () => {
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message')
           .equal('Food deleted');
+        done();
+      });
+  });
+  it('should not delete food of other admin', (done) => {
+    chai.request(server)
+      .delete('/api/v1/menu/2')
+      .set('x-access-token', token3)
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Food not found');
         done();
       });
   });
