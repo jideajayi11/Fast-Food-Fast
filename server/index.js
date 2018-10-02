@@ -6,6 +6,7 @@ import env from 'dotenv';
 import orderRoute from './routes/orderRoute';
 import authRoute from './routes/authRoute';
 import foodRoute from './routes/foodRoute';
+import apiDoc from './helpers/swagger';
 
 env.config();
 
@@ -20,7 +21,7 @@ app.get('/', (req, res) => res.status(200).send({
   message: 'Fast-Food-Fast is a food delivery '
   + 'service app for restaurants',
 }));
-
+apiDoc(app);
 authRoute(app);
 orderRoute(app);
 foodRoute(app);
