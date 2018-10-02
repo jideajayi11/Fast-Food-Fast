@@ -61,10 +61,6 @@ class Food {
       menus: data.rows,
       status: 'success',
       message: 'Food List',
-    }))
-    .catch(err => res.status(500).json({
-      status: 'error',
-      message: err,
     }));
   }
   static deleteMenu (req, res, next) {
