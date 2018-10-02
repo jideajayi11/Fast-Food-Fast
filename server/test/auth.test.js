@@ -340,4 +340,17 @@ describe('Authentication Endpoints for Admin', () => {
         done();
       });
   });
+  it('should list restaurant', (done) => {
+    chai.request(server)
+      .get('/api/v1/admin')
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('restaurant');
+        expect(res.body).to.have.property('status').equal('success');
+        expect(res.body).to.have.property('message')
+          .equal('Restaurant found');
+        done();
+      });
+  });
 });

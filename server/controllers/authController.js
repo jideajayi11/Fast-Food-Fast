@@ -131,6 +131,16 @@ class Auth {
         message: 'Signin failed.',
       }));
   }
+  static restaurant(req, res, next) {
+    db.query('SELECT id, restaurantname, phonenumber FROM admin')
+    .then((data) => { 
+      return res.status(200).json({
+        restaurant: data.rows,
+        status: 'success',
+        message: 'Restaurant found'
+      });
+    });
+  }
 }
 
 export default Auth;
