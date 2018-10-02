@@ -122,6 +122,29 @@ class Order {
       }
     });
   }
+  static cancelOrder (req, res, next) {
+    db.query(`update orders set  orderstatus = $1
+     where id = $2 AND userId = $3 AND orderstatus = $4 RETURNING *`,
+      ['Cancelled', req.params.orderId, req.decoded.userId, 'New'])
+    .then((data) => {
+      if(data.rows[0]) {
+        return res.status(200).json({
+          status: 'success',
+          message: 'Order was cancelled'
+        });
+      }
+      return res.status(404).json({
+        status: 'error',
+        message: 'Order not found'
+      });
+    })
+    .catch((err) => {
+      return res.status(505).json({
+        status: 'error',
+        message: err
+      });
+    });
+  }
 	
 }
 export default Order;
