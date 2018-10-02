@@ -53,10 +53,7 @@ class Food {
       });
     } 
     if(!GenValid.isRequired(id)) {
-      if (req.query.id)
-        id = req.query.id;
-      else
-        id = 1;
+      id = req.query.id;
     }
     db.query(`select id, foodname, imageurl, price, adminid
      from food where adminid = $1`, [id])
