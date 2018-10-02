@@ -1,0 +1,299 @@
+swagger: "2.0"
+info:
+  description: "This is a food delivery service app for restaurants. You can find out more at [Fast-Food-Fast](https://fast-food-fast-delivery.herokuapp.com/)."
+  version: "1.0.0"
+  title: "Fast-Food-Fast"
+  termsOfService: "fast-food-fast-delivery.herokuapp.com/terms/"
+  contact:
+    email: "jideajayi11@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "fast-food-fast-delivery.herokuapp.com"
+basePath: "/api/v1"
+tags:
+- name: "users"
+  description: "Provides authentication for users"
+- name: "admin"
+  description: "Provides authentication for admin"
+- name: "food"
+  description: "Manages food menu"
+- name: "orders"
+  description: "Manages food orders"
+schemes:
+- "https"
+- "http"
+paths:
+  /auth/signup:
+    post:
+      tags:
+      - "users"
+      summary: "Create account for a new user"
+      description: ""
+      operationId: "userSignup"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User details object to create account"
+        required: true
+        schema:
+          $ref: "#/definitions/users"
+      responses:
+        201:
+          description: "success"
+        400:
+          description: "Incomplete signup details"
+      security:
+      - petstore_auth:
+        - "write:pets"
+        - "read:pets"
+  /auth/login:
+    post:
+      tags:
+      - "users"
+      summary: "Sign in a user"
+      description: ""
+      operationId: "userSignin"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Email and password object for authentication"
+        required: true
+        schema:
+          $ref: "#/definitions/users"
+      responses:
+        400:
+          description: "Incomplete signin details"
+        404:
+          description: "Authentication failed."
+        200:
+          description: "You are now logged in"
+      security:
+      - petstore_auth:
+        - "write:pets"
+        - "read:pets"
+  /admin/signup:
+    post:
+      tags:
+      - "admin"
+      summary: "Create account for restaurant admin"
+      description: ""
+      operationId: "adminSignup"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Admin details object to create account"
+        required: true
+        schema:
+          $ref: "#/definitions/admin"
+      responses:
+        201:
+          description: "success"
+        400:
+          description: "Incomplete signup details"
+      security:
+      - petstore_auth:
+        - "write:pets"
+        - "read:pets"
+  /admin/login:
+    post:
+      tags:
+      - "admin"
+      summary: "Sign in admin"
+      description: ""
+      operationId: "adminSignin"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Email and password object for authentication"
+        required: true
+        schema:
+          $ref: "#/definitions/admin"
+      responses:
+        400:
+          description: "Incomplete signin details"
+        404:
+          description: "Authentication failed."
+        200:
+          description: "You are now logged in"
+      security:
+      - petstore_auth:
+        - "write:pets"
+        - "read:pets"
+  /menu:
+    post:
+      tags:
+      - "food"
+      summary: "Admin can add food to menu"
+      description: ""
+      operationId: "addMenu"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Food details object"
+        required: true
+        schema:
+          $ref: "#/definitions/food"
+      responses:
+        400:
+          description: "Incomplete body parameters"
+        201:
+          description: "Food Added"
+      security:
+      - petstore_auth:
+        - "write:pets"
+        - "read:pets"
+    get:
+      tags:
+      - "food"
+      summary: "List Menu "
+      description: ""
+      operationId: "getMenu"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: ""
+        description: ""
+        required: false
+        schema:
+          $ref: "#/definitions/food"
+      responses:
+        400:
+          description: "Incomplete body parameters"
+        201:
+          description: "Food Added"
+      security:
+      - petstore_auth:
+        - "write:pets"
+        - "read:pets"
+  /orders:
+    post:
+      tags:
+      - "orders"
+      summary: "Users can place an order"
+      description: ""
+      operationId: "addOrder"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Food item and quantity object"
+        required: true
+        schema:
+          $ref: "#/definitions/orders"
+      responses:
+        400:
+          description: "Incomplete parameters"
+        404:
+          description: "Food not found"
+        201:
+          description: "Order Created"
+      security:
+      - petstore_auth:
+        - "write:pets"
+        - "read:pets"
+    get:
+      tags:
+      - "orders"
+      summary: "List admin orders"
+      description: ""
+      operationId: "getOrders"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Food item and quantity object"
+        required: true
+        schema:
+          $ref: "#/definitions/orders"
+      responses:
+        400:
+          description: "Incomplete parameters"
+        404:
+          description: "Food not found"
+        201:
+          description: "Order Created"
+      security:
+      - petstore_auth:
+        - "write:pets"
+        - "read:pets"
+  /orders/{orderId}:
+    put:
+      tags:
+      - "orders"
+      summary: "Admin can change order status"
+      description: ""
+      operationId: "updateOrder"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "orderId"
+        in: "path"
+        description: "order status object"
+        required: true
+        type: "integer"
+        schema:
+          $ref: "#/definitions/orders"
+      responses:
+        404:
+          description: "Order not found"
+        400:
+          description: "Invalid orderStatus"
+        200:
+          description: "Order was updated"
+      security:
+      - petstore_auth:
+        - "write:pets"
+        - "read:pets"
+    get:
+      tags:
+      - "orders"
+      summary: "List admin orders"
+      description: ""
+      operationId: "getOrder"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "orderId"
+        description: "id of the order"
+        required: true
+        type: "integer"
+        schema:
+          $ref: "#/definitions/orders"
+      responses:
+        404:
+          description: "Order not found"
+        200:
+          description: "Order found"
+      security:
+      - petstore_auth:
+        - "write:pets"
+        - "read:pets"

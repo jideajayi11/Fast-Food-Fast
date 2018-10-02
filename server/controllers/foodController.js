@@ -27,7 +27,17 @@ class Food {
       }));
   }
   static getMenu (req, res, next) {
-    db.query('select id, foodname, imageurl, price, adminid from food')
+    let value;
+    if(req.headers['x-access-token']) {
+      value = jwt.verify(req.headers['x-access-token'],
+        process.env.JWT_KEY, (err, decoded) => {
+        return decoded.adminId;
+      });
+    } else {
+      value = req.query.id;
+    }
+    db.query(`select id, foodname, imageurl, price, adminid 
+    from food where adminid = $1`, [value])
     .then(data => res.status(200).json({
       menus: data.rows,
       status: 'success',

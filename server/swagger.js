@@ -3,5 +3,7 @@ import YAML from "yamljs";
 
 const swaggerDocument = YAML.load(`${process.cwd()}/swagger.yaml`);
 
-export default app.use('/api/v1/docs',
- swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+export default (app) => { 
+	app.use('/api/v1/docs',
+ 	swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+};
