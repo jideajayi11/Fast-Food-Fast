@@ -24,6 +24,11 @@ class Auth {
         });
         return res.status(201).json({
           token,
+          data: {
+            id: data.rows[0].id,
+            fullName: data.rows[0].fullname,
+            email: data.rows[0].email
+          },
           status: 'success',
           message: 'User account was created',
         });
@@ -54,6 +59,11 @@ class Auth {
           });
           return res.status(200).json({
             token,
+            data: {
+              id: data.rows[0].id,
+              fullName: data.rows[0].fullname,
+              email: data.rows[0].email
+            },
             status: 'success',
             message: 'You are now logged in',
           });
@@ -87,6 +97,11 @@ class Auth {
         });
         return res.status(201).json({
           token,
+          data: {
+            id: data.rows[0].id,
+            fullName: data.rows[0].fullname,
+            email: data.rows[0].email
+          },
           status: 'success',
           message: 'Admin account was created',
         });
@@ -117,6 +132,11 @@ class Auth {
           });
           return res.status(200).json({
             token,
+            data: {
+              id: data.rows[0].id,
+              fullName: data.rows[0].fullname,
+              email: data.rows[0].email
+            },
             status: 'success',
             message: 'You are now logged in',
           });
