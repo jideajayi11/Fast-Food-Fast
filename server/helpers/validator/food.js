@@ -1,7 +1,7 @@
 import GenValid from './index';
 
 class Validate {
-  static addMenu(req, res, next) {
+  static foodBody(req, res, next) {
     if (!(GenValid.isRequired(req.body.foodDescription))
        || !(GenValid.isRequired(req.body.foodPrice))
        || !(GenValid.isRequired(req.body.imageURL))) {
@@ -17,7 +17,7 @@ class Validate {
     }
     next();
   }
-  static deleteMenu(req, res, next) {
+  static foodParams(req, res, next) {
     if (!(GenValid.isInteger(req.params.foodId))) {
       return res.status(400).json({
         status: 'error',

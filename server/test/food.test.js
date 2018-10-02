@@ -15,7 +15,7 @@ const token = jwt.sign({
 });
 const token3 = jwt.sign({
   email: 'my@email113.com',
-  adminId: 1
+  adminId: 2
 }, process.env.JWT_KEY, {
   expiresIn: 86400
 });
@@ -105,6 +105,42 @@ describe('Food API Endpoint', () => {
           .equal('Admin is not signed in');
         done();
       });
+  });
+  it('should update food', (done) => {
+    chai.request(server)
+      .put('/api/v1/menu/1')
+      .set('x-access-token', token)
+      .send({
+        foodDescription: 'Beans',
+        foodPrice: 200,
+        imageURL: 'beans.png'
+      })
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('success');
+        expect(res.body).to.have.property('message')
+          .equal('Food updated');
+        done();
+      });
+  });
+  it('should not update food of another admin', (done) => {
+    chai.request(server)
+    .put('/api/v1/menu/1')
+    .set('x-access-token', token3)
+    .send({
+      foodDescription: 'Beans',
+      foodPrice: 200,
+      imageURL: 'beans.png'
+    })
+    .end((err, res) => {
+      res.should.have.status(404);
+      res.body.should.be.a('object');
+      expect(res.body).to.have.property('status').equal('error');
+      expect(res.body).to.have.property('message')
+        .equal('Food not found');
+      done();
+    });
   });
   it('should get all food', (done) => {
     chai.request(server)
