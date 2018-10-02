@@ -7,6 +7,7 @@ import orderRoute from './routes/orderRoute';
 import authRoute from './routes/authRoute';
 import foodRoute from './routes/foodRoute';
 import apiDoc from './helpers/swagger';
+import cors from 'cors';
 
 env.config();
 
@@ -17,6 +18,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(cors());
 app.get('/', (req, res) => res.status(200).send({
   message: 'Fast-Food-Fast is a food delivery '
   + 'service app for restaurants',

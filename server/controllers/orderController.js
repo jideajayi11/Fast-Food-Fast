@@ -138,12 +138,6 @@ class Order {
         message: 'Order not found'
       });
     })
-    .catch((err) => {
-      return res.status(505).json({
-        status: 'error',
-        message: err
-      });
-    });
   }
 	
 }
