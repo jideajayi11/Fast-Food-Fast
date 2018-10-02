@@ -46,7 +46,20 @@ class Food {
     });
   }
   static getMenu (req, res, next) {
-    db.query('select id, foodname, imageurl, price, adminid from food')
+    let id;
+    if(req.headers['x-access-token']) {
+      jwt.verify(req.headers['x-access-token'], process.env.JWT_KEY, (err, decoded) => {
+        id = decoded.adminId;
+      });
+    } 
+    if(!GenValid.isRequired(id)) {
+      if (req.query.id)
+        id = req.query.id;
+      else
+        id = 1;
+    }
+    db.query(`select id, foodname, imageurl, price, adminid
+     from food where adminid = $1`, [id])
     .then(data => res.status(200).json({
       menus: data.rows,
       status: 'success',
