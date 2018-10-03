@@ -3,7 +3,11 @@ import db from '../helpers/db';
 
 class Order {
   static getOrders(req, res, next) {
-    db.query('SELECT * FROM orders where adminId = $1',
+    db.query(`SELECT users.fullname, users.phonenumber, 
+    users.deliveryAddress, food.foodname, food.imageURL, 
+    orders.price, orders.quantity, orders.orderstatus 
+    FROM users, food, orders WHERE orders.userid = users.id 
+    AND orders.foodid = food.id AND orders.adminid = $1`,
       [req.decoded.adminId])
     .then((data) => { 
       return res.status(200).json({
@@ -16,7 +20,11 @@ class Order {
   }
 
   static getUserOrders(req, res, next) {
-    db.query('select * from orders where userId = $1',
+    db.query(`SELECT admin.restaurantname, admin.phonenumber, 
+    food.foodname, food.imageURL, orders.price, orders.quantity, 
+    orders.orderstatus FROM admin, food, orders 
+    WHERE orders.adminid = admin.id AND orders.foodid = food.id 
+    AND orders.userid = $1`,
 			[req.params.userId])
 		.then((data) => {
 			return res.status(200).json({

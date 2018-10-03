@@ -18,17 +18,13 @@ class Auth {
       .then((data) => {
         const token = jwt.sign({
           email: data.rows[0].email,
+          fullName: data.rows[0].fullname,
           userId: data.rows[0].id
         }, process.env.JWT_KEY, {
           expiresIn: 86400
         });
         return res.status(201).json({
           token,
-          data: {
-            id: data.rows[0].id,
-            fullName: data.rows[0].fullname,
-            email: data.rows[0].email
-          },
           status: 'success',
           message: 'User account was created',
         });
@@ -53,17 +49,13 @@ class Auth {
         if (bcrypt.compareSync(req.body.password, data.rows[0].password)) {
           const token = jwt.sign({
             email: data.rows[0].email,
+            fullName: data.rows[0].fullname,
             userId: data.rows[0].id
           }, process.env.JWT_KEY, {
             expiresIn: 86400
           });
           return res.status(200).json({
             token,
-            data: {
-              id: data.rows[0].id,
-              fullName: data.rows[0].fullname,
-              email: data.rows[0].email
-            },
             status: 'success',
             message: 'You are now logged in',
           });
@@ -91,17 +83,13 @@ class Auth {
       .then((data) => {
         const token = jwt.sign({
           email: data.rows[0].email,
+          fullName: data.rows[0].fullname,
           adminId: data.rows[0].id
         }, process.env.JWT_KEY, {
           expiresIn: 86400
         });
         return res.status(201).json({
           token,
-          data: {
-            id: data.rows[0].id,
-            fullName: data.rows[0].fullname,
-            email: data.rows[0].email
-          },
           status: 'success',
           message: 'Admin account was created',
         });
@@ -126,17 +114,13 @@ class Auth {
         if (bcrypt.compareSync(req.body.password, data.rows[0].password)) {
           const token = jwt.sign({
             email: data.rows[0].email,
+            fullName: data.rows[0].fullname,
             adminId: data.rows[0].id
           }, process.env.JWT_KEY, {
             expiresIn: 86400
           });
           return res.status(200).json({
             token,
-            data: {
-              id: data.rows[0].id,
-              fullName: data.rows[0].fullname,
-              email: data.rows[0].email
-            },
             status: 'success',
             message: 'You are now logged in',
           });
