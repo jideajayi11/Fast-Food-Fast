@@ -5,7 +5,7 @@ class Order {
   static getOrders(req, res, next) {
     db.query(`SELECT users.fullname, users.phonenumber, 
     users.deliveryAddress, food.foodname, food.imageURL, 
-    orders.price, orders.quantity, orders.orderstatus 
+    orders.price, orders.quantity, orders.id, orders.orderstatus 
     FROM users, food, orders WHERE orders.userid = users.id 
     AND orders.foodid = food.id AND orders.adminid = $1`,
       [req.decoded.adminId])
