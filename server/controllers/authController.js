@@ -83,7 +83,7 @@ class Auth {
       .then((data) => {
         const token = jwt.sign({
           email: data.rows[0].email,
-          fullName: data.rows[0].fullname,
+          fullName: data.rows[0].restaurantname,
           adminId: data.rows[0].id
         }, process.env.JWT_KEY, {
           expiresIn: 86400
@@ -114,7 +114,7 @@ class Auth {
         if (bcrypt.compareSync(req.body.password, data.rows[0].password)) {
           const token = jwt.sign({
             email: data.rows[0].email,
-            fullName: data.rows[0].fullname,
+            fullName: data.rows[0].restaurantname,
             adminId: data.rows[0].id
           }, process.env.JWT_KEY, {
             expiresIn: 86400
