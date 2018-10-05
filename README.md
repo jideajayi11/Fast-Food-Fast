@@ -37,57 +37,57 @@ Restaurant Admin can add, edit, delete food and manage orders made to their rest
   </tr>
 	<tr>
 		<td>GET</td>
-		<td>`/api/v1/orders`</td>
-		<td>`Fetch all orders`</td>
+		<td>/api/v1/orders</td>
+		<td>Fetch all orders</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>GET</td>
-		<td>`/api/v1/users/:userId/orders`</td>
-		<td>`Fetch user order history`</td>
+		<td>/api/v1/users/:userId/orders</td>
+		<td>Fetch user order history</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>GET</td>
-		<td>`/api/v1/orders/:orderId`</td>
-		<td>`Fetch an order`</td>
+		<td>/api/v1/orders/:orderId</td>
+		<td>Fetch an order</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>POST</td>
-		<td>`/api/v1/orders`</td>
-		<td>`Add an order`</td>
-		<td>`quantity` `foodId`</td>
+		<td>/api/v1/orders</td>
+		<td>Add an order</td>
+		<td>quantity, foodId</td>
 	</tr>
 	<tr>
 		<td>PUT</td>
-		<td>`/api/v1/orders/:id`</td>
-		<td>`Update an order`</td>
-		<td>`orderStatus`</td>
+		<td>/api/v1/orders/:id</td>
+		<td>Update an order</td>
+		<td>orderStatus</td>
 	</tr>
 	<tr>
 		<td>POST</td>
-		<td>`/api/v1/menu`</td>
-		<td>`Add Menu`</td>
-		<td>`foodDescription` `foodPrice` `imageURL`</td>
+		<td>/api/v1/menu</td>
+		<td>Add Menu</td>
+		<td>foodDescription, foodPrice, imageURL</td>
 	</tr>
 	<tr>
 		<td>GET</td>
-		<td>`/api/v1/menu`</td>
-		<td>`Fetch all Menu`</td>
+		<td>/api/v1/menu</td>
+		<td>Fetch all Menu</td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>POST</td>
-		<td>`/api/v1/auth/signup`</td>
-		<td>`Create Account`</td>
-		<td>`fullName` `phoneNumber` `deliveryAddress` `email` `password` `confirmPassword`</td>
+		<td>/api/v1/auth/signup</td>
+		<td>Create Account</td>
+		<td>fullName, phoneNumber, deliveryAddress, email, password, confirmPassword</td>
 	</tr>
 	<tr>
 		<td>POST</td>
-		<td>`/api/v1/auth/login`</td>
-		<td>`Login`</td>
-		<td>`email` `password`</td>
+		<td>/api/v1/auth/login</td>
+		<td>Login</td>
+		<td>email, password</td>
 	</tr>
 </table>
 
