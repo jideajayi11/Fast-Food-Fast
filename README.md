@@ -111,6 +111,20 @@ Restaurant Admin can add, edit, delete food and manage orders made to their rest
 * Fetch an Order
 * Add an Order
 * Update an Order
+* Fetch Order history
+#### Menu
+* Add Menu
+* Fetch Menu
+#### Users
+* Signup
+* Signin
+#### Admin
+* Signup
+* Signin
+#### Extra
+* Cancel Order (user)
+* Fetch all Restaurant
+
 
 ### Installation
 * git clone
