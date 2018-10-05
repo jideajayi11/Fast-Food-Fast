@@ -1,9 +1,9 @@
 import chai from 'chai';
 import { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../index';
 import env from 'dotenv';
 import jwt from 'jsonwebtoken';
+import server from '../index';
 
 env.config();
 
@@ -38,7 +38,7 @@ describe('Order Endpoints', () => {
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message').equal('Order Created');
-        
+
         done();
       });
   });
@@ -55,7 +55,7 @@ describe('Order Endpoints', () => {
         res.body.should.be.a('object');
         expect(res.body).to.have.property('status').equal('error');
         expect(res.body).to.have.property('message').equal('Food not found');
-        
+
         done();
       });
   });
@@ -125,7 +125,7 @@ describe('Order Endpoints', () => {
         done();
       });
   });
-	
+
   it('should update, order not found', (done) => {
     chai.request(server)
       .put('/api/v1/orders/100')
@@ -141,7 +141,7 @@ describe('Order Endpoints', () => {
         done();
       });
   });
-	
+
   it('should not update an order with user token', (done) => {
     chai.request(server)
       .put('/api/v1/orders/1')
@@ -248,7 +248,7 @@ describe('Order Endpoints', () => {
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
-        expect(res.body).to.have.property('orders')
+        expect(res.body).to.have.property('orders');
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message')
           .equal('Orders found');
@@ -274,7 +274,7 @@ describe('Order Endpoints', () => {
       .end((err, res) => {
         res.should.have.status(200);
         res.body.should.be.a('object');
-        expect(res.body).to.have.property('orders')
+        expect(res.body).to.have.property('orders');
         expect(res.body).to.have.property('status').equal('success');
         expect(res.body).to.have.property('message')
           .equal('Orders found');
@@ -283,43 +283,43 @@ describe('Order Endpoints', () => {
   });
   it('should add another order', (done) => {
     chai.request(server)
-    .post('/api/v1/orders')
-    .set('x-access-token', token2)
-    .send({
-      quantity: 2,
-      foodId: 1
-    })
-    .end((err, res) => {
-      res.should.have.status(201);
-      res.body.should.be.a('object');
-      expect(res.body).to.have.property('status').equal('success');
-      expect(res.body).to.have.property('message').equal('Order Created');
-      
-      done();
-    });
+      .post('/api/v1/orders')
+      .set('x-access-token', token2)
+      .send({
+        quantity: 2,
+        foodId: 1
+      })
+      .end((err, res) => {
+        res.should.have.status(201);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('success');
+        expect(res.body).to.have.property('message').equal('Order Created');
+
+        done();
+      });
   });
   it('should cancel an order', (done) => {
     chai.request(server)
-    .put('/api/v1/cancel/2')
-    .set('x-access-token', token2)
-    .end((err, res) => {
-      res.should.have.status(200);
-      res.body.should.be.a('object');
-      expect(res.body).to.have.property('status').equal('success');
-      expect(res.body).to.have.property('message').equal('Order was cancelled');
-      done();
-    });
+      .put('/api/v1/cancel/2')
+      .set('x-access-token', token2)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('success');
+        expect(res.body).to.have.property('message').equal('Order was cancelled');
+        done();
+      });
   });
   it('should not cancel an order', (done) => {
     chai.request(server)
-    .put('/api/v1/cancel/1')
-    .set('x-access-token', token2)
-    .end((err, res) => {
-      res.should.have.status(404);
-      res.body.should.be.a('object');
-      expect(res.body).to.have.property('status').equal('error');
-      expect(res.body).to.have.property('message').equal('Order not found');
-      done();
-    });
+      .put('/api/v1/cancel/1')
+      .set('x-access-token', token2)
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message').equal('Order not found');
+        done();
+      });
   });
 });

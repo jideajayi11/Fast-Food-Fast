@@ -5,7 +5,17 @@ import db from '../helpers/db';
 
 env.config();
 
+/**
+ * @description handles authentication for users and admin
+ */
 class Auth {
+  /**
+   *
+   * @param {object} req
+   * @param {object} res
+   * @param {Function} next
+   * @returns {object} The method creates a new user account
+   */
   static userSignup(req, res, next) {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
@@ -43,6 +53,13 @@ class Auth {
       });
   }
 
+  /**
+   *
+   * @param {object} req
+   * @param {object} res
+   * @param {Function} next
+   * @returns {object} The method signin a user
+   */
   static userSignin(req, res, next) {
     db.query('select * from users where email = $1', [req.body.email])
       .then((data) => {
@@ -71,6 +88,13 @@ class Auth {
       }));
   }
 
+  /**
+   *
+   * @param {object} req
+   * @param {object} res
+   * @param {Function} next
+   * @returns {object} The method creates a new admin account
+   */
   static adminSignup(req, res, next) {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
@@ -108,6 +132,13 @@ class Auth {
       });
   }
 
+  /**
+   *
+   * @param {object} req
+   * @param {object} res
+   * @param {Function} next
+   * @returns {object} The method signin an admin
+   */
   static adminSignin(req, res, next) {
     db.query('select * from admin where email = $1', [req.body.email])
       .then((data) => {
@@ -135,15 +166,21 @@ class Auth {
         message: 'Signin failed.',
       }));
   }
+
+  /**
+   *
+   * @param {object} req
+   * @param {object} res
+   * @param {Function} next
+   * @returns {object} The method get all restaurant
+   */
   static restaurant(req, res, next) {
     db.query('SELECT id, restaurantname, phonenumber FROM admin')
-    .then((data) => { 
-      return res.status(200).json({
+      .then(data => res.status(200).json({
         restaurant: data.rows,
         status: 'success',
         message: 'Restaurant found'
-      });
-    });
+      }));
   }
 }
 

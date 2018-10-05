@@ -126,21 +126,21 @@ describe('Food API Endpoint', () => {
   });
   it('should not update food of another admin', (done) => {
     chai.request(server)
-    .put('/api/v1/menu/1')
-    .set('x-access-token', token3)
-    .send({
-      foodDescription: 'Beans',
-      foodPrice: 200,
-      imageURL: 'beans.png'
-    })
-    .end((err, res) => {
-      res.should.have.status(404);
-      res.body.should.be.a('object');
-      expect(res.body).to.have.property('status').equal('error');
-      expect(res.body).to.have.property('message')
-        .equal('Food not found');
-      done();
-    });
+      .put('/api/v1/menu/1')
+      .set('x-access-token', token3)
+      .send({
+        foodDescription: 'Beans',
+        foodPrice: 200,
+        imageURL: 'beans.png'
+      })
+      .end((err, res) => {
+        res.should.have.status(404);
+        res.body.should.be.a('object');
+        expect(res.body).to.have.property('status').equal('error');
+        expect(res.body).to.have.property('message')
+          .equal('Food not found');
+        done();
+      });
   });
   it('should get all food', (done) => {
     chai.request(server)

@@ -3,11 +3,11 @@ import * as http from 'http';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
 import env from 'dotenv';
+import cors from 'cors';
 import orderRoute from './routes/orderRoute';
 import authRoute from './routes/authRoute';
 import foodRoute from './routes/foodRoute';
 import apiDoc from './helpers/swagger';
-import cors from 'cors';
 
 env.config();
 
@@ -27,8 +27,7 @@ apiDoc(app);
 authRoute(app);
 orderRoute(app);
 foodRoute(app);
-app.use(function (err, req, res, next) {
-  console.error(err.stack);
+app.use((err, req, res, next) => {
   res.status(500).json({
     status: 'error',
     message: 'Something is not right!',
@@ -38,6 +37,5 @@ app.use(function (err, req, res, next) {
 app.set('port', port);
 const server = http.createServer(app);
 server.listen(port);
-console.log('connected to port');
 
 export default server;

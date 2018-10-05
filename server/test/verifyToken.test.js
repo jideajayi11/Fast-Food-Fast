@@ -1,9 +1,9 @@
 import chai from 'chai';
 import { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../index';
 import env from 'dotenv';
 import jwt from 'jsonwebtoken';
+import server from '../index';
 
 env.config();
 
