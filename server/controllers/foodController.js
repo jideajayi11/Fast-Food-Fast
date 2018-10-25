@@ -82,7 +82,7 @@ class Food {
       id = req.query.id;
     }
     db.query(`select id, foodname, imageurl, price, adminid
-     from food where adminid = $1`, [id])
+     from food where adminid = $1 order by date desc`, [id])
       .then(data => res.status(200).json({
         menus: data.rows,
         status: 'success',

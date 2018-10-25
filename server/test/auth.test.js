@@ -1,7 +1,24 @@
 import chai from 'chai';
 import { expect } from 'chai';
 import chaiHttp from 'chai-http';
+import env from 'dotenv';
+import jwt from 'jsonwebtoken';
 import server from '../index';
+
+env.config();
+
+const token = jwt.sign({
+  email: 'my@email3.com',
+  adminId: 1
+}, process.env.JWT_KEY, {
+  expiresIn: 86400
+});
+const token2 = jwt.sign({
+  email: 'my@email.com',
+  userId: 1
+}, process.env.JWT_KEY, {
+  expiresIn: 86400
+});
 
 const should = chai.should();
 chai.use(chaiHttp);
@@ -352,5 +369,46 @@ describe('Authentication Endpoints for Admin', () => {
           .equal('Restaurant found');
         done();
       });
+  });
+});
+describe('Token Verification Endpoints', () => {
+  it('should not pass verification', (done) => {
+    chai.request(server)
+    .get('/api/v1/verifytoken')
+    .set('x-access-token', 'token')
+    .end((err, res) => {
+      res.should.have.status(403);
+      res.body.should.be.a('object');
+      expect(res.body).to.have.property('status').equal('error');
+      expect(res.body).to.have.property('message')
+        .equal('Failed to authenticate token.');
+      done();
+    });
+  });
+  it('should verify admin', (done) => {
+    chai.request(server)
+    .get('/api/v1/verifytoken')
+    .set('x-access-token', token)
+    .end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.be.a('object');
+      expect(res.body).to.have.property('status').equal('success');
+      expect(res.body).to.have.property('message')
+        .equal('admin verified');
+      done();
+    });
+  });
+  it('should verify user', (done) => {
+    chai.request(server)
+    .get('/api/v1/verifytoken')
+    .set('x-access-token', token2)
+    .end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.be.a('object');
+      expect(res.body).to.have.property('status').equal('success');
+      expect(res.body).to.have.property('message')
+        .equal('user verified');
+      done();
+    });
   });
 });

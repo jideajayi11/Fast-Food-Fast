@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import env from 'dotenv';
 import db from '../helpers/db';
+import GenValid from '../helpers/validator';
 
 env.config();
 
@@ -181,6 +182,35 @@ class Auth {
         status: 'success',
         message: 'Restaurant found'
       }));
+  }
+
+  /**
+   * 
+   * @param {object} req 
+   * @param {object} res 
+   * @param {Function} next 
+   * @returns {object} The method to verify token
+   */
+  static verifyToken(req, res, next) {
+    const token = req.headers['x-access-token'];
+    jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
+      if (err) {
+        return res.status(403).json({
+          status: 'error',
+          message: 'Failed to authenticate token.'
+        });
+      } else if (GenValid.isRequired(decoded.adminId)) {
+        return res.status(200).json({
+          status: 'success',
+          message: 'admin verified'
+        });
+      } else if (GenValid.isRequired(decoded.userId)) {
+        return res.status(200).json({
+          status: 'success',
+          message: 'user verified'
+        });
+      }
+    });
   }
 }
 
