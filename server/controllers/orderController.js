@@ -17,7 +17,7 @@ class Order {
     users.deliveryAddress, food.foodname, food.imageURL, 
     orders.price, orders.quantity, orders.id, orders.orderstatus 
     FROM users, food, orders WHERE orders.userid = users.id 
-    AND orders.foodid = food.id AND orders.adminid = $1`,
+    AND orders.foodid = food.id AND orders.adminid = $1 order by orders.date desc`,
     [req.decoded.adminId])
       .then(data => res.status(200).json({
         orders: data.rows,
@@ -38,7 +38,7 @@ class Order {
     food.foodname, food.imageURL, orders.id, orders.price, orders.quantity, 
     orders.orderstatus FROM admin, food, orders 
     WHERE orders.adminid = admin.id AND orders.foodid = food.id 
-    AND orders.userid = $1`,
+    AND orders.userid = $1 order by orders.date desc`,
     [req.params.userId])
       .then(data => res.status(200).json({
         orders: data.rows,
